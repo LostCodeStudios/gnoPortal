@@ -16,24 +16,21 @@ create = ->
 
   game.stage.backgroundColor = config.backgroundColor
 
+  game.physics.startSystem(Phaser.Physics.ARCADE)
+
   paddles[config.colorCodes.blue] = new Paddle(game, config.colorCodes.blue)
   paddles[config.colorCodes.orange] = new Paddle(game, config.colorCodes.orange)
 
   upKey = game.input.keyboard.addKey(Phaser.Keyboard.W)
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
-update = ->
-  console.log ':update'
-
-  updateBlue
-  updateOrange
-
 updateBlue = ->
   console.log ':updateBlue'
 
-  paddles[config.colorCodes.blue].update
+  paddles[config.colorCodes.blue].update()
 
   # TODO handle input
+  console.log('upKey' + upKey.isDown)
   if upKey.isDown
     paddles[config.colorCodes.blue].move(config.dirCodes.up)
 
@@ -46,5 +43,11 @@ updateOrange = ->
   paddles[config.colorCodes.blue].update
 
   # TODO run AI decisions
+
+update = ->
+  console.log ':update'
+
+  updateBlue()
+  updateOrange()
 
 game = new Phaser.Game config.screenWidth, config.screenHeight, Phaser.AUTO, '', preload: preload, create: create, update: update

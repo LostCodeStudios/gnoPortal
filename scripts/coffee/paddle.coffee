@@ -15,7 +15,11 @@ Paddle = (game, colorCode) ->
   this.sprite = game.add.sprite(x, y, 'paddle')
   this.sprite.scale.setTo(config.spriteScale, config.spriteScale)
 
+  game.physics.arcade.enable(this.sprite)
+
   this.move = (direction) ->
+    console.log "moving"
+
     switch direction
       when config.dirCodes.up
         this.sprite.body.velocity = new Phaser.Point(0, -config.paddleSpeed)
