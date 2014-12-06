@@ -17,6 +17,7 @@ create = ->
   console.log ':create'
 
   game.stage.backgroundColor = config.backgroundColor
+  game.stage.smoothed = false
 
   game.physics.startSystem(Phaser.Physics.ARCADE)
 
