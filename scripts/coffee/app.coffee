@@ -2,6 +2,7 @@ config = require "./config.coffee"
 Paddle = require "./paddle.coffee"
 Cuby = require "./cuby.coffee"
 Wall = require "./wall.coffee"
+AI = require "./ai.coffee"
 
 paddles = [ ]
 
@@ -16,6 +17,7 @@ walls = { }
 companion = { }
 
 paddlesGroup = { }
+paddleAI = {}
 
 preload = ->
   console.log ':preload'
@@ -26,7 +28,6 @@ preload = ->
   game.load.image('wall-horizontal', 'assets/images/wall-horizontal.png')
 
 create = ->
-  console.log ':create'
 
   game.stage.backgroundColor = config.backgroundColor
   game.stage.smoothed = false
@@ -65,16 +66,13 @@ create = ->
   # TODO remove this
   upKey2 = game.input.keyboard.addKey(Phaser.Keyboard.UP)
   downKey2 = game.input.keyboard.addKey(Phaser.Keyboard.DOWN)
+  # TODO complete this
 
   companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
-  setTimeout ->
-    companion.fire(new Phaser.Point(109,100))
-  , 500
 
-  companion.addEvent(->
-    console.log('tee hee hee')
-  )
+  companion.fire(new Phaser.Point(109,100))
 
+  paddleAI = AI(game, paddles[config.colorCodes.orange], companion);
 
 buildHorizontalWalls = ->
   x = 0
@@ -87,12 +85,8 @@ buildHorizontalWalls = ->
 
     x += 100
 
-
-updateOrange = ->
-  # TODO run AI decisions
-
 update = ->
-  updateOrange()
+  paddleAI.paddleUpdate()
 
   game.physics.arcade.collide(companion.sprite, walls, ->
     companion.onCollide()
