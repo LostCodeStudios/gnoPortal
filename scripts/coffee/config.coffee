@@ -7,10 +7,16 @@ config = {
   spriteScale: 8,
 
   colorCodes: {
-    blue: 0
+    blue: 0,
     orange: 1
   },
 
+  dirCodes: {
+    up: 0,
+    down: 1
+  },
+
+  paddleSpeed: 400,
   paddleMargin: 40
 }
 

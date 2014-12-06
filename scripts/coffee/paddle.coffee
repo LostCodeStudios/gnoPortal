@@ -15,6 +15,18 @@ Paddle = (game, colorCode) ->
   this.sprite = game.add.sprite(x, y, 'paddle')
   this.sprite.scale.setTo(config.spriteScale, config.spriteScale)
 
+  game.physics.arcade.enable(this.sprite) # give me a body!
+
+  this.move = (direction) ->
+    switch direction
+      when config.dirCodes.up
+        this.sprite.body.velocity = new Phaser.Point(0, -config.paddleSpeed)
+      when config.dirCodes.down
+        this.sprite.body.velocity = new Phaser.Point(0, config.paddleSpeed)
+
+  this.update = ->
+    this.sprite.body.velocity = new Phaser.Point(0, 0); # don't move by default
+
   return this
 
 module.exports = Paddle
