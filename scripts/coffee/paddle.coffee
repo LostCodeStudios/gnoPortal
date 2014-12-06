@@ -28,8 +28,5 @@ Paddle = (game, colorCode) ->
       when config.dirCodes.down
         this.sprite.body.velocity = new Phaser.Point(0, config.paddleSpeed)
 
-  this.update = ->
-    this.sprite.body.velocity = new Phaser.Point(0, 0); # don't move by default
-
   return this
 module.exports = Paddle
