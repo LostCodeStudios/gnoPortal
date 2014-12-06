@@ -12,6 +12,8 @@ walls = { }
 
 companion = { }
 
+paddlesGroup = { }
+
 preload = ->
   console.log ':preload'
 
@@ -30,6 +32,9 @@ create = ->
 
   paddles[config.colorCodes.blue] = new Paddle(game, config.colorCodes.blue)
   paddles[config.colorCodes.orange] = new Paddle(game, config.colorCodes.orange)
+  paddlesGroup = game.add.group()
+  paddlesGroup.add(paddles[config.colorCodes.blue].sprite)
+  paddlesGroup.add(paddles[config.colorCodes.orange].sprite)
 
   walls = game.add.group()
 
@@ -42,6 +47,10 @@ create = ->
   setTimeout ->
     companion.fire(new Phaser.Point(109,100))
   , 2000
+
+  companion.addEvent(->
+    console.log('tee hee hee')
+  )
 
 
 buildHorizontalWalls = ->
@@ -56,12 +65,9 @@ buildHorizontalWalls = ->
     x += 100
 
 updateBlue = ->
-  console.log ':updateBlue'
-
   paddles[config.colorCodes.blue].update()
 
   # TODO handle input
-  console.log('upKey' + upKey.isDown)
   if upKey.isDown
     paddles[config.colorCodes.blue].move(config.dirCodes.up)
 
@@ -69,20 +75,19 @@ updateBlue = ->
     paddles[config.colorCodes.blue].move(config.dirCodes.down)
 
 updateOrange = ->
-  console.log ":updateOrange"
-
   paddles[config.colorCodes.blue].update
 
   # TODO run AI decisions
 
 update = ->
-  console.log ':update'
-
   updateBlue()
   updateOrange()
 
-  game.physics.arcade.collide(companion.sprite, walls, (companionSprite, wallSprite) ->
-    companion.switch(wallSprite.wall.horizontal);
+  game.physics.arcade.collide(companion.sprite, walls, ->
+    companion.onCollide()
+  )
+  game.physics.arcade.collide(companion.sprite, paddlesGroup, ->
+    companion.onCollide()
   )
 
 game = new Phaser.Game config.screenWidth, config.screenHeight, Phaser.AUTO, '', preload: preload, create: create, update: update

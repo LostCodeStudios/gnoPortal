@@ -10,4 +10,7 @@ Wall = (game, horizontal, x, y) ->
 
   game.physics.arcade.enable(this.sprite)
 
+  this.sprite.body.immovable = true
+  this.sprite.body.moves = false # don't move! You're a wall!
+
 module.exports = Wall

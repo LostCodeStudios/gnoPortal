@@ -15,7 +15,11 @@ Paddle = (game, colorCode) ->
   this.sprite = game.add.sprite(x, y, 'paddle')
   this.sprite.scale.setTo(config.spriteScale, config.spriteScale)
 
+  this.sprite.paddle = this # circular lolz
+
   game.physics.arcade.enable(this.sprite)
+
+  this.sprite.body.immovable = true
 
   this.move = (direction) ->
     switch direction
