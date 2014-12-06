@@ -30,5 +30,4 @@ Paddle = (game, colorCode) ->
     this.sprite.body.velocity = new Phaser.Point(0, 0); # don't move by default
 
   return this
-
 module.exports = Paddle

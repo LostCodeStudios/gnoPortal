@@ -1,5 +1,6 @@
 config = require "./config.coffee"
 Paddle = require "./paddle.coffee"
+Cuby = require "./cuby.coffee"
 
 paddles = [ ]
 
