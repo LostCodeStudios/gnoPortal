@@ -1,5 +1,9 @@
 config = {
   backgroundColor: "#350f28",
+
+  screenWidth: 1080,
+  screenHeight: 600,
+
   spriteScale: 8,
 
   colorCodes: {

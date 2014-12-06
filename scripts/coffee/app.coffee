@@ -1,4 +1,5 @@
 config = require "./config.coffee"
+Paddle = require "./paddle.coffee"
 
 preload = ->
   console.log ':preload'
@@ -10,10 +11,10 @@ create = ->
 
   game.stage.backgroundColor = config.backgroundColor
 
-  paddle = game.add.sprite(40, 300, 'paddle')
-  paddle.scale.setTo(8, 8)
+  paddle = new Paddle(game, config.colorCodes.blue)
+  paddle2 = new Paddle(game, config.colorCodes.orange)
 
 update = ->
   # TODO update
 
-game = new Phaser.Game 1080, 600, Phaser.AUTO, '', preload: preload, create: create, update: update
+game = new Phaser.Game config.screenWidth, config.screenHeight, Phaser.AUTO, '', preload: preload, create: create, update: update
