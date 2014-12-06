@@ -10,6 +10,7 @@ preload = ->
   console.log ':preload'
 
   game.load.image('paddle', 'assets/images/paddle.png')
+  game.load.image('qb', 'assets/images/qb.png')
 
 create = ->
   console.log ':create'
