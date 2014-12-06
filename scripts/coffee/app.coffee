@@ -11,7 +11,7 @@ preload = ->
   console.log ':preload'
 
   game.load.image('paddle', 'assets/images/paddle.png')
-  game.load.image('qb', 'assets/images/qb.png')
+  game.load.image('cuby', 'assets/images/qb.png')
 
 create = ->
   console.log ':create'
@@ -26,7 +26,7 @@ create = ->
   upKey = game.input.keyboard.addKey(Phaser.Keyboard.W)
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
-  companion = new Cuby(this,  )
+  companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
 
 updateBlue = ->
   console.log ':updateBlue'
