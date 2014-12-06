@@ -4,7 +4,6 @@ Cuby = (game, pos) ->
   this.pos = pos;
 
   this.sprite = game.add.sprite(pos.x, pos.y, 'cuby')
-  this.sprite.scale.setTo(config.spriteScale, config.spriteScale)
 
   game.physics.arcade.enable(this.sprite)
 
