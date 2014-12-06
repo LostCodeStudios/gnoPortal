@@ -17,7 +17,9 @@ config = {
   },
 
   paddleSpeed: 400,
-  paddleMargin: 40
+  paddleMargin: 40,
+
+  cubySpeed:400,
 }
 
 module.exports = config

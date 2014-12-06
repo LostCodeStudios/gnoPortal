@@ -11,10 +11,18 @@ Cuby = (game, pos) ->
 
   this.fire = (direction) ->
     console.log "cuby fired"
-    this.sprite.body.velocity = direction; # shoot it!
+    direction.normalize()
+
+
+    this.sprite.body.velocity = direction.setMagnitude(config.cubySpeed); # shoot it!
 
   this.trail = (color, time) ->
     console.log "should emit"
+
+  this.switch = (isH) ->
+    if isH then this.sprite.body.velocity.multiply(1,-1)
+    else this.sprite.body.velocity.multiple(-1,1)
+
 
   return this
 

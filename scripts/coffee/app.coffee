@@ -27,6 +27,10 @@ create = ->
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
   companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
+  setTimeout ->
+    companion.fire(new Phaser.Point(109,100))
+  , 2000
+
 
 updateBlue = ->
   console.log ':updateBlue'
