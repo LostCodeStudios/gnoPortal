@@ -26,6 +26,8 @@ create = ->
   upKey = game.input.keyboard.addKey(Phaser.Keyboard.W)
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
+  companion = new Cuby(this,  )
+
 updateBlue = ->
   console.log ':updateBlue'
 
