@@ -8,6 +8,9 @@ paddles = [ ]
 upKey = { }
 downKey = { }
 
+upKey2 = { }
+downKey2 = { }
+
 walls = { }
 
 companion = { }
@@ -43,10 +46,30 @@ create = ->
   upKey = game.input.keyboard.addKey(Phaser.Keyboard.W)
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
+  upKey.onDown.add(->
+    paddles[config.colorCodes.blue].move(config.dirCodes.up)
+  )
+
+  upKey.onUp.add(->
+    paddles[config.colorCodes.blue].sprite.body.velocity = new Phaser.Point(0, 0)
+  )
+
+  downKey.onDown.add(->
+    paddles[config.colorCodes.blue].move(config.dirCodes.down)
+  )
+
+  downKey.onUp.add(->
+    paddles[config.colorCodes.blue].sprite.body.velocity = new Phaser.Point(0, 0)
+  )
+
+  # TODO remove this
+  upKey2 = game.input.keyboard.addKey(Phaser.Keyboard.UP)
+  downKey2 = game.input.keyboard.addKey(Phaser.Keyboard.DOWN)
+
   companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
   setTimeout ->
     companion.fire(new Phaser.Point(109,100))
-  , 2000
+  , 500
 
   companion.addEvent(->
     console.log('tee hee hee')
@@ -64,23 +87,11 @@ buildHorizontalWalls = ->
 
     x += 100
 
-updateBlue = ->
-  paddles[config.colorCodes.blue].update()
-
-  # TODO handle input
-  if upKey.isDown
-    paddles[config.colorCodes.blue].move(config.dirCodes.up)
-
-  if downKey.isDown
-    paddles[config.colorCodes.blue].move(config.dirCodes.down)
 
 updateOrange = ->
-  paddles[config.colorCodes.blue].update
-
   # TODO run AI decisions
 
 update = ->
-  updateBlue()
   updateOrange()
 
   game.physics.arcade.collide(companion.sprite, walls, ->
@@ -89,5 +100,14 @@ update = ->
   game.physics.arcade.collide(companion.sprite, paddlesGroup, ->
     companion.onCollide()
   )
+
+  # bound paddles to the walls
+  paddlesGroup.forEach((sprite) ->
+    if sprite.y < 24
+      sprite.y = 24
+    if sprite.y > 600 - 184
+      sprite.y = 600 - 184
+  )
+
 
 game = new Phaser.Game config.screenWidth, config.screenHeight, Phaser.AUTO, '', preload: preload, create: create, update: update
