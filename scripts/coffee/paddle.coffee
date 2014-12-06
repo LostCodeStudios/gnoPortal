@@ -15,8 +15,6 @@ Paddle = (game, colorCode) ->
   this.sprite = game.add.sprite(x, y, 'paddle')
   this.sprite.scale.setTo(config.spriteScale, config.spriteScale)
 
-  game.physics.arcade.enable(this.sprite) # give me a body!
-
   this.move = (direction) ->
     switch direction
       when config.dirCodes.up
