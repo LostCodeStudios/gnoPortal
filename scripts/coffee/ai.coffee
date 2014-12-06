@@ -7,7 +7,8 @@ AI = (game, paddle, cuby) ->
     
     console.log(time);
 
+  this.paddleUpdate = ->
 
+  return this;
 
-
-module.exports = 
+module.exports = AI
