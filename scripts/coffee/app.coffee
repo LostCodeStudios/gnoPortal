@@ -45,10 +45,10 @@ create = ->
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
   companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
-  companion.fire(new Phaser.Point(109,100))
+  companion.fire new Phaser.Point(1,2)
 
   paddleAI = AI(game, paddles[config.colorCodes.orange], companion);
-
+  companion.addEvent paddleAI.onBallCollide
 
 
   companion.addEvent(->
