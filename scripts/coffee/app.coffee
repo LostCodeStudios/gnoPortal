@@ -14,7 +14,6 @@ preload = ->
   game.load.image('cuby', 'assets/images/qb.png')
 
 create = ->
-  console.log ':create'
 
   game.stage.backgroundColor = config.backgroundColor
   game.stage.smoothed = false
@@ -28,18 +27,19 @@ create = ->
   downKey = game.input.keyboard.addKey(Phaser.Keyboard.S)
 
   companion = new Cuby(this, new Phaser.Point(config.screenWidth/2, config.screenHeight/2))
+  companion.fire(new Phaser.Point(109,100))
   setTimeout ->
-    companion.fire(new Phaser.Point(109,100))
-  , 2000
+    companion.switch(true)
+  , 400
+
+
 
 
 updateBlue = ->
-  console.log ':updateBlue'
 
   paddles[config.colorCodes.blue].update()
 
   # TODO handle input
-  console.log('upKey' + upKey.isDown)
   if upKey.isDown
     paddles[config.colorCodes.blue].move(config.dirCodes.up)
 
@@ -47,14 +47,12 @@ updateBlue = ->
     paddles[config.colorCodes.blue].move(config.dirCodes.down)
 
 updateOrange = ->
-  console.log ":updateOrange"
 
   paddles[config.colorCodes.blue].update
 
   # TODO run AI decisions
 
 update = ->
-  console.log ':update'
 
   updateBlue()
   updateOrange()
