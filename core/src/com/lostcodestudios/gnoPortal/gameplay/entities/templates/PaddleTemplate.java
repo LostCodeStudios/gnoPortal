@@ -36,11 +36,11 @@ public class PaddleTemplate implements EntityTemplate {
 		float posY = 0f;
 		
 		if (side.equals("left")) {
-			posX = -Convert.pixelsToMeters(722f/2f) + 3f;
+			posX = -Convert.pixelsToMeters(722f/2f) + 5f;
 		}
 		
 		if (side.equals("right")) {
-			posX = Convert.pixelsToMeters(722f/2f) - 3f;
+			posX = Convert.pixelsToMeters(722f/2f) - 5f;
 		}
 
 		

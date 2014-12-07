@@ -12,6 +12,7 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	Vector2 leftPaddleVelocity = new Vector2();
 	Vector2 crosshairPosition = new Vector2();
+	boolean ballfired =false;
 	
 	public InputSystem(InputMultiplexer input) {
 		super(input);
@@ -86,7 +87,6 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 		
 		return true;
 	}
-	
-	
+
 
 }

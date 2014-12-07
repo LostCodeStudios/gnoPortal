@@ -67,6 +67,10 @@ public class PongWorld extends EntityWorld {
 		this.createEntity("paddle", "right");
 		this.createEntity("ball", "left");
 		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
+		this.createEntity("wall", "bottomWall", new Rectangle(0,-462/2f,722f,24));
+		this.createEntity("wall", "top", new Rectangle(0,462/2f,722f,24));
+		this.createEntity("wall", "leftWall", new Rectangle(-722f/2,0,24,462f));
+		this.createEntity("wall", "rightWall", new Rectangle(722f/2,0,24,462f));
 		this.createEntity("crosshair");
 	}
 	

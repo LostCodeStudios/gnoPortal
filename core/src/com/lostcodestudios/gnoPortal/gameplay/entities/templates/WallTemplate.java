@@ -30,10 +30,12 @@ public class WallTemplate implements EntityTemplate{
 		sprite.setWidth(r.width);
 		sprite.setHeight(r.height);
 		
+		sprite.setOrigin(new Vector2(r.width/2f, r.height/2f));
+		
 		e.addComponent(sprite);
 		
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(Convert.pixelsToMeters(r.width/2f), r.height/2f);
+		shape.setAsBox(Convert.pixelsToMeters(r.width/2f), Convert.pixelsToMeters(r.height/2f));
 		e.addComponent(new Body(world, e, BodyType.StaticBody, shape, Convert.pixelsToMeters(new Vector2(r.x, r.y))));
 		return e;
 	}
