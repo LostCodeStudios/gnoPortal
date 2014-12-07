@@ -15,6 +15,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.gameplay.entities.systems.AISystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.TargetSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
@@ -90,8 +91,8 @@ public class PongWorld extends EntityWorld {
 		this.createEntity("wall", "leftWall", new Rectangle(-722f/2-8,0,24,462f));
 		this.createEntity("wall", "rightWall", new Rectangle(722f/2+8,0,24,462f));
 		this.createEntity("crosshair");
-		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
-		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
+//		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
+//		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
 	}
 	
 	/* (non-Javadoc)

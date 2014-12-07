@@ -34,7 +34,7 @@ public class BulletTemplate implements EntityTemplate {
 		
 		e.addComponent(p);
 		
-		TargetPosition tar = new TargetPosition(target, 30f) {
+		TargetPosition tar = new TargetPosition(target, 60f) {
 
 			@Override
 			public void onReachedTarget(EntityWorld world, Entity e) {

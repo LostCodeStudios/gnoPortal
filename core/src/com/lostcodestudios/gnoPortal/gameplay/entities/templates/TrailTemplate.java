@@ -26,9 +26,11 @@ public class TrailTemplate implements EntityTemplate {
 		float rot = (Float)args[2];
 		
 		ParticleEffect pe = new ParticleEffect(Gdx.files.internal("stream.particle"),Gdx.files.internal("img"));
-		pe.setColor(tint);
+		//pe.setColor(tint);
 		pe.setRotation(rot);
 		pe.setPosition(position);
+		
+		pe.setLayer(5000);
 		e.addComponent(pe);
 		pe.start();
 		e.addComponent(new Particle(e, position, rot));

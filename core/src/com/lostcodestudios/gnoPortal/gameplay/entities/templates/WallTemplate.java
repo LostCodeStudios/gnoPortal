@@ -12,6 +12,7 @@ import com.lostcode.javalib.entities.components.ComponentManager;
 import com.lostcode.javalib.entities.components.generic.Health;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Collidable;
+import com.lostcode.javalib.entities.components.physical.Transform;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
@@ -46,11 +47,14 @@ public class WallTemplate implements EntityTemplate{
 		
 		if(e.getTag().equals("leftWall") || e.getTag().equals("rightWall"))
 		{
-			Health h = new Health(e,world, 10){
+			Health h = new Health(e,world, 100){
 				@Override
 				protected void onEmpty() {
 					//End the game;
 					world.setGameOverInfo(new GameOverInfo());
+					
+					
+					
 					super.onEmpty();
 				}
 				
@@ -59,8 +63,26 @@ public class WallTemplate implements EntityTemplate{
 				
 					float hR = (float)((getCurrentValue()+10)/(getMaxValue()+10));
 					sprite.setColor(new Color(Math.min(1, hR+.3f), hR, hR, 1));
-					if(getCurrentValue() - amount <= 0)
+					if(getCurrentValue() - amount <= 0) {
 						world.setGameOverInfo(new GameOverInfo());
+						
+						float dir = -1;
+						float rot = 0f;
+						
+						if (e.getTag().equals("leftWall")) {
+							rot = 180f;
+							dir = 1;
+						}
+						
+						Vector2 origin = ((Transform)e.getComponent(Transform.class)).getPosition();
+						
+						float x = origin.x + dir * 3;
+						float y = origin.y;
+						
+
+							world.createEntity("trail", new Vector2(x,y ), Color.WHITE, rot);
+			
+					}
 					super.onDrain(amount);
 				}
 			};
