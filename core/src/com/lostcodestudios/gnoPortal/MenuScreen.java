@@ -70,8 +70,23 @@ public class MenuScreen extends InputScreen {
 		
 		if(command.equals("quit") || command.equals("exit"))
 			Gdx.app.exit();
-		else if (command.equals("play")) {
-			game.getScreenManager().addScreen(new GameplayScreen(game));
+		else if (command.contains("play")) {
+			
+			int level = 1;
+			
+			if (command.length() > 5) { // AN ARGUMENT!
+				level = Integer.parseInt(command.substring(5));
+				
+				if (level > 0 && level < 3) // TODO SET THIS MAX!!!!!
+				{
+					
+				}
+				else
+				{
+					level = 1;
+				}
+			}
+			game.getScreenManager().addScreen(new GameplayScreen(game, level));	
 			
 			exit();
 		}
