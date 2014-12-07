@@ -75,12 +75,8 @@ public class GameplayScreen extends InputScreen {
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.ESCAPE || keycode == Keys.BACK) {
-			//Entity player = world.getPlayer();
-			//Health health = player.getComponent(Health.class);
-				
-			//if (!health.isEmpty()) {
-				//game.getScreenManager().addScreen(new PauseScreen(game));
-			//}
+			game.getScreenManager().addScreen(new MenuScreen(game));
+			exit();
 		}
 		
 		return true;

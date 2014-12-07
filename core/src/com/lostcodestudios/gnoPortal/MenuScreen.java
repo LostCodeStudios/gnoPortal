@@ -70,8 +70,11 @@ public class MenuScreen extends InputScreen {
 		
 		if(command.equals("quit") || command.equals("exit"))
 			Gdx.app.exit();
-		else if (command.equals("play"))
+		else if (command.equals("play")) {
+			game.getScreenManager().addScreen(new GameplayScreen(game));
+			
 			exit();
+		}
 		else{
 			consoleData.set(currentInput, consoleData.get(currentInput)+ command );
 			if(command.equals("rm") || command.equals("rm -rf") 
