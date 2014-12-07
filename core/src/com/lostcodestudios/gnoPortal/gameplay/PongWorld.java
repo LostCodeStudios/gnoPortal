@@ -27,7 +27,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 public class PongWorld extends EntityWorld {
 
 	public static final float PADDLE_SPEED = 25f;
-	private Entity ball;
+	public Entity Ball;
 	
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
@@ -61,14 +61,14 @@ public class PongWorld extends EntityWorld {
 	protected void buildSystems() {
 		super.buildSystems();
 		
-		systems.addSystem(inputSystem = new InputSystem(input, ball));
+		systems.addSystem(inputSystem = new InputSystem(input, Ball));
 	}
 
 	@Override
 	protected void buildEntities() {
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
-		inputSystem.Ball = this.createEntity("ball", "left");
+		Ball = inputSystem.Ball = this.createEntity("ball", "left");
 		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
 		this.createEntity("wall", "bottomWall", new Rectangle(0,-462/2f,722f,24));
 		this.createEntity("wall", "top", new Rectangle(0,462/2f,722f,24));
