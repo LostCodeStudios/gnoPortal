@@ -93,23 +93,25 @@ public class GameplayScreen extends InputScreen {
 	@Override
 	public void render(float delta) {
 		
-		//update cionsike
-		if(ticker <2)
-			ticker++;
-		else
-		{
-			ticker =0;
-			if(index < program[lineOfCode].length())
-				consoleData.set(consoleData.size-1, consoleData.get(consoleData.size-1).concat(new Character(program[lineOfCode].charAt(index++)).toString()));
-			else{
-				consoleData.add("");
-				if(lineOfCode >= program.length)
-					lineOfCode = 0;
-				else
-					lineOfCode++;
-				index = 0;
-			}
-		
+		if(win == false){
+			//update cionsike
+			if(ticker <2)
+				ticker++;
+			else
+			{
+				ticker =0;
+				if(index < program[lineOfCode].length())
+					consoleData.set(consoleData.size-1, consoleData.get(consoleData.size-1).concat(new Character(program[lineOfCode].charAt(index++)).toString()));
+				else{
+					consoleData.add("");
+					if(lineOfCode >= program.length)
+						lineOfCode = 0;
+					else
+						lineOfCode++;
+					index = 0;
+				}
+			
+		}
 		}
 		
 		
