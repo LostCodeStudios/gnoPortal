@@ -39,6 +39,8 @@ public class PortalTemplate implements EntityTemplate {
 		
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "portal" + color);
 		
+		sprite.setLayer(3);
+		
 		e.addComponent(sprite);
 		
 		PolygonShape shape = new PolygonShape();

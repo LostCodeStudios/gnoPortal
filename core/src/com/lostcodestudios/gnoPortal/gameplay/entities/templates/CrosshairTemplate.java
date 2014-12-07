@@ -20,6 +20,7 @@ public class CrosshairTemplate implements EntityTemplate {
 		e.init("crosshair", "", "crosshair");
 		
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "crosshair");
+		sprite.setLayer(3);
 		
 		e.addComponent(sprite);
 		

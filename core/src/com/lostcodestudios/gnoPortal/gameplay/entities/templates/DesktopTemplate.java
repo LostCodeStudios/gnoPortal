@@ -22,6 +22,7 @@ public class DesktopTemplate implements EntityTemplate {
 		Sprite sprite = new Sprite(new Texture(Gdx.files.internal("desktop.png")));
 		
 		sprite.setOrigin(new Vector2(1021, 490));
+		sprite.setLayer(1);
 		
 		e.addComponent(sprite);
 		
