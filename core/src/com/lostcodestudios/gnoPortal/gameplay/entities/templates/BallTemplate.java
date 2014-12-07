@@ -43,7 +43,7 @@ public class BallTemplate implements EntityTemplate {
 		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 60f, 0)));
 		bd.type = BodyType.DynamicBody;
 		bd.allowSleep = false;
-
+		bd.fixedRotation = false;
 		Body body = new Body(world, e, bd, fd);
 		e.addComponent(body);
 		return e;

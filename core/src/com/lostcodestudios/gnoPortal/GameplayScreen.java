@@ -180,7 +180,7 @@ public class GameplayScreen extends InputScreen {
 	
 	public void renderConsole(){
 		Vector2 ballGradient;
-			ballGradient = new Vector2(.34f, .34f);
+			ballGradient = new Vector2(.5f, .5f);
 				
 		
 		//Start rendering to an offscreen color buffer
