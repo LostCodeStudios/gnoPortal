@@ -98,21 +98,33 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 			
 			if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 				// left click?
+				Entity e = null;
 				
-				Entity e = world.tryGetEntity("blue", "player", "portal");
+				do {
+					 e = world.tryGetEntity("blue", "player", "portal");
 				
-				if (e != null)
-					e.delete();
+					if (e != null)
+						e.delete();
+					else
+						System.out.println("oops");
+				} while (e != null);	
+				
 				
 				world.createEntity("portal", "player", pos, "blue");
 			}
 			if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
 				// right click?
 				
-				Entity e = world.tryGetEntity("orange", "player", "portal");
+				Entity e = null;
 				
-				if (e != null)
-					e.delete();
+				do {
+					 e = world.tryGetEntity("orange", "player", "portal");
+				
+					if (e != null)
+						e.delete();
+					else
+						System.out.println("oops");
+				} while (e != null);	
 				
 				world.createEntity("portal", "player", pos, "orange");
 			}
