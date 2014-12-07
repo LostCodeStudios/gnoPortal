@@ -26,6 +26,7 @@ public class GameplayScreen extends InputScreen {
 	Array<String> consoleData;		
 	
 	String[] program;
+	Vector2 offset = new Vector2(0,0);
 	
 	int ticker = 0;
 	int lineOfCode = 0;
@@ -33,6 +34,7 @@ public class GameplayScreen extends InputScreen {
 	ShaderProgram blurShader;
 	FrameBuffer blurTargetA, blurTargetB;
 	TextureRegion fboRegion;
+	float zoom = 1;
 	
 	OrthographicCamera cam;
 	
@@ -119,8 +121,15 @@ public class GameplayScreen extends InputScreen {
 		
 		if (world.isGameOver()) {
 			//StealthGameOverInfo info = (StealthGameOverInfo) world.getGameOverInfo();
+			this.win = true;
+			zoom = 2.33f;
+			System.out.println("hi");
+			((OrthographicCamera)world.getCamera()).zoom = zoom;
+			cam.zoom = 1.34f;
 			
-			exit();
+			FBO_SIZE = (int) (1024*1f);
+			offset = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()).scl(1f/2.33f).add(180,140);
+
 			//game.getScreenManager().addScreen(new GameOverScreen(game, info.score));
 		}
 	}
@@ -169,7 +178,7 @@ public class GameplayScreen extends InputScreen {
 		return true;
 	}
 	
-	public static final int FBO_SIZE = 1024;
+	public static int FBO_SIZE = 1024;
 	 
 	public static final float MAX_BLUR = 2f;
 	
@@ -204,7 +213,7 @@ public class GameplayScreen extends InputScreen {
 		//GAUSSIAN BLURR;
 		int firstIndex = Math.max(consoleData.size-24, 0);
 		for(int i = firstIndex; i < Math.min(firstIndex + 24, consoleData.size); i++)
-				consoleFont.draw(sb, consoleData.get(i), 8, Gdx.graphics.getHeight() - 14 - (i-firstIndex)*17);
+				consoleFont.draw(sb, consoleData.get(i),offset.x+ 8, offset.y + Gdx.graphics.getHeight() - 14 - (i-firstIndex)*17);
 
 		
 		
@@ -317,6 +326,5 @@ public class GameplayScreen extends InputScreen {
 			"\n" + 
 			"	gl_FragColor = vColor * vec4(sum.rgb, 1.0);\n" + 
 			"}";
-	 
-
+	private boolean win;
 }
