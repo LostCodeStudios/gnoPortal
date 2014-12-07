@@ -7,6 +7,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.render.Sprite;
+import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcodestudios.gnoPortal.gameplay.entities.components.AI;
@@ -24,7 +25,14 @@ public class PaddleTemplate implements EntityTemplate {
 		
 		e.init("paddle" + side, "paddles", "player");
 		
-		
+		e.onDeleted.addCallback("this", new EventCallback() {
+
+			@Override
+			public void invoke(Entity e, Object... args) {
+				System.out.println("deleted paddle");
+			}
+			
+		});
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "paddle");
 		
 		sprite.setLayer(3);

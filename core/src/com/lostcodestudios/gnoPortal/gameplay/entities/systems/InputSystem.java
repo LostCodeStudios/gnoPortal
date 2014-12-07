@@ -9,6 +9,8 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Particle;
 import com.lostcode.javalib.entities.components.physical.Transform;
+import com.lostcode.javalib.entities.components.physical.Velocity;
+import com.lostcode.javalib.utils.Convert;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 
@@ -27,14 +29,33 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 	@Override
 	protected void process(Entity e) {
 		if (e.getTag().equals("paddleleft")) {
-			leftPaddleVelocity.scl(PongWorld.PADDLE_SPEED);
-			((Body) e.getComponent(Body.class)).setLinearVelocity(leftPaddleVelocity);
+			
+			Body b = e.getComponent(Body.class);
+
+			
+			b.setLinearVelocity(leftPaddleVelocity);
+
+			Vector2 pos = b.getPosition().cpy();
+			
+			float hy = Convert.pixelsToMeters(139f/2f);
+			
+			float top = Convert.pixelsToMeters(462f/2f - 8f);
+			float bot = -top;
+			
+			if (pos.y + hy > top) {
+//				pos.y = top - hy;
+				b.setPosition(new Vector2(pos.x, top-hy));
+				
+			} else if (pos.y - hy < bot) {
+//				pos.y = bot + hy;
+				b.setPosition(new Vector2(pos.x, bot+hy));
+			}
+			
 		}
 		
 		else if (e.getTag().equals("crosshair")) {
 			((Particle) e.getComponent(Particle.class)).setPosition(crosshairPosition);
 		}
-		
 		
 		super.process(e);
 	}
@@ -53,12 +74,12 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 		
 		if (keycode == Keys.W)
 		{
-			leftPaddleVelocity.y = 1;
+			leftPaddleVelocity.y = PongWorld.PADDLE_SPEED;
 			return true;
 		}
 		else if (keycode == Keys.S)
 		{
-			leftPaddleVelocity.y = -1;
+			leftPaddleVelocity.y = -PongWorld.PADDLE_SPEED;
 			return true;
 		}
 		

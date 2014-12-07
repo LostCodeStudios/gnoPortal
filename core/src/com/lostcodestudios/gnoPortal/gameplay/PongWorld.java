@@ -106,19 +106,26 @@ public class PongWorld extends EntityWorld {
 		
 		case 1:
 			
-			this.createEntity("wall", "testWall", new Rectangle(0,0,36,462));
+			this.createEntity("wall", "testWall", new Rectangle(0,0,24,462));
 			
 			break;
 			
 		case 2:
 			
-			this.createEntity("wall", "testWall", new Rectangle(0,0,36,462));
+			this.createEntity("wall", "1", new Rectangle(0, 0, 24, 462/3));
+			this.createEntity("wall", "2", new Rectangle(-64, 128, 24, 462/3));
+			this.createEntity("wall", "3", new Rectangle(64, 128, 24, 462/3));
+			this.createEntity("wall", "4", new Rectangle(-64, -128, 24, 462/3));
+			this.createEntity("wall", "5", new Rectangle(64, -128, 24, 462/3));
 			
 			break;
 			
 		case 3:
 			
-			this.createEntity("wall", "testWall", new Rectangle(0,0,36,462));
+			this.createEntity("wall", "1", new Rectangle(0, 64, 722/3, 24));
+			this.createEntity("wall", "2", new Rectangle(0, -64, 722/3, 24));
+			this.createEntity("wall", "3", new Rectangle(-256, 256, 722/3, 24));
+			this.createEntity("wall", "4", new Rectangle(256, -256, 722/3, 24));
 			
 			break;
 			

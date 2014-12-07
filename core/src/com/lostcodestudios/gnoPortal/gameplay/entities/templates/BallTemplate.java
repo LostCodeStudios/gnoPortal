@@ -57,7 +57,7 @@ public class BallTemplate implements EntityTemplate {
 		fd.shape = shape;
 		fd.restitution = 1.01f;
 		fd.friction=0;
-		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 60f, 0)));
+		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 64f, 0)));
 		bd.type = BodyType.DynamicBody;
 		bd.allowSleep = false;
 		bd.fixedRotation = false;
