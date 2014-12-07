@@ -87,7 +87,7 @@ public class PongWorld extends EntityWorld {
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return Convert.pixelsToMeters(new Rectangle(-722f/2, -462f/2, 722f, 462f));
+		return Convert.pixelsToMeters(new Rectangle(-722f/2 * 2.33f, -462f/2 * 2.33f, 722f * 2.33f, 462f * 2.33f));
 	}
 
 	public void enableDebug(){
