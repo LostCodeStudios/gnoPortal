@@ -8,13 +8,13 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
-import com.lostcodestudios.gnoPortal.GameplayScreen;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.TargetSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
@@ -23,6 +23,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTempla
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.DesktopTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PortalTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.TrailTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 
 /**
@@ -62,6 +63,7 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("portal", new PortalTemplate());
 		this.addTemplate("desktop", new DesktopTemplate());
 		this.addTemplate("bullet", new BulletTemplate());
+		this.addTemplate("trail", new TrailTemplate());
 	}
 	
 	private InputSystem inputSystem;
@@ -85,6 +87,8 @@ public class PongWorld extends EntityWorld {
 		this.createEntity("wall", "leftWall", new Rectangle(-722f/2-8,0,24,462f));
 		this.createEntity("wall", "rightWall", new Rectangle(722f/2+8,0,24,462f));
 		this.createEntity("crosshair");
+		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
+		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
 	}
 	
 	/* (non-Javadoc)
