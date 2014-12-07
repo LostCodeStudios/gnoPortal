@@ -35,11 +35,32 @@ public class AISystem extends EntitySystem {
 		float distance = pp.x - cp.x;
 		float time = distance / cv.x;
 		
-		if (Math.abs(time * cv.y) > time * PongWorld.PADDLE_SPEED){
-			
+		if(distance < 46){
+		if (cp.y + time * cv.y > pp.y + time * (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED
+				&& cp.y - time * cv.y > pp.y + time * (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED){
 		} else
 		{
-			
+			if(cp.y - time * cv.y > pp.y + time * (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED)
+			{
+				System.out.println(time);
+				if(Math.abs(pp.y - (time*cv.y + cp.y)) > 6)
+					((Velocity)e.getComponent(
+							Velocity.class)).setLinearVelocity(new Vector2(0, (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)));
+				else
+					((Velocity)e.getComponent(
+							Velocity.class)).setLinearVelocity(new Vector2(0,0));
+			}
+			else if(cp.y + time * cv.y > pp.y + time * (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED)
+			{
+				System.out.println(time);
+				if(Math.abs(pp.y - (time*-cv.y + cp.y)) > 6)
+					((Velocity)e.getComponent(
+							Velocity.class)).setLinearVelocity(new Vector2(0, (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)));
+				else
+					((Velocity)e.getComponent(
+							Velocity.class)).setLinearVelocity(new Vector2(0,0));
+			}
+		}
 		}
 	}
 

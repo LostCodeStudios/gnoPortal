@@ -15,6 +15,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.gameplay.entities.systems.AISystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.TargetSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
