@@ -17,6 +17,7 @@ import com.lostcode.javalib.utils.SpriteSheet;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.DesktopTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PortalTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
@@ -56,6 +57,7 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("wall",new WallTemplate());
 		this.addTemplate("crosshair", new CrosshairTemplate());
 		this.addTemplate("portal", new PortalTemplate());
+		this.addTemplate("desktop", new DesktopTemplate());
 	}
 	
 	private InputSystem inputSystem;
@@ -68,6 +70,7 @@ public class PongWorld extends EntityWorld {
 
 	@Override
 	protected void buildEntities() {
+		this.createEntity("desktop");
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
 		Ball = inputSystem.Ball = this.createEntity("ball", "left");
