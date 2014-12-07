@@ -2,6 +2,8 @@
 <SpriteSheet>
 <texture>sprites.png</texture>
 <rect key="ball">26, 1, 16, 16</rect>
+<rect key="bluebullet">68, 25, 5, 5</rect>
+<rect key="orangebullet">76, 25, 5, 5</rect>
 <rect key="pixel">11, 47, 1, 1</rect>
 <rect key="crosshair">46, 4, 16, 16</rect>
 <rect key="portalorange">88, 3, 18, 18</rect>
