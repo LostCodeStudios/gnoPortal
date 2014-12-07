@@ -34,50 +34,7 @@ public class GnoPortal extends Game {
 		
 		super.create();
 		
-		getScreenManager().addScreen(new GameScreen(this) {
-			
-			@Override
-			public void show() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void resume() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void resize(int width, int height) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void render(float delta) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void pause() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void hide() {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void dispose() {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		getScreenManager().addScreen(new MenuScreen(this));
 		
 		
 	}
@@ -86,6 +43,7 @@ public class GnoPortal extends Game {
 	public void render () {
 		Gdx.gl.glClearColor(0.1845f, 0.0390625f, .140625f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		getScreenManager().render();
 	}
 
 	@Override
