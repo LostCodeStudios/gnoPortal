@@ -3,12 +3,16 @@
  */
 package com.lostcodestudios.gnoPortal.gameplay;
 
+import java.io.IOException;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcode.javalib.utils.SpriteSheet;
 
 /**
  * @author william
@@ -26,8 +30,11 @@ public class PongWorld extends EntityWorld {
 	 */
 	@Override
 	protected void buildSpriteSheet() {
-		// TODO Auto-generated method stub
-
+		try {
+			this.spriteSheet = SpriteSheet.fromXML(Gdx.files.internal("spritesheet.xml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
