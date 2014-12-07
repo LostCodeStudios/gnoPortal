@@ -30,6 +30,9 @@ public class GameplayScreen extends InputScreen {
 		camera = new OrthographicCamera(722, 462);
 		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy());
 		
+		consoleData = new Array<String>();
+		consoleData.add("tits");
+		consoleData.add("boobs");
 		consoleFont = new BitmapFont(Gdx.files.internal("console.fnt"));
 		sb = new SpriteBatch();
 	}
