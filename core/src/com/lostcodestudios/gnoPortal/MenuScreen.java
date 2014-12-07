@@ -13,7 +13,7 @@ public class MenuScreen extends InputScreen {
 	SpriteBatch sb;
 	Array<String> consoleData;
 	int currentInput = 11;
-	StringBuilder input;
+	String input;
 	
 	public MenuScreen(Game game) {
 		super(game);
@@ -22,7 +22,7 @@ public class MenuScreen extends InputScreen {
 		consoleFont = new BitmapFont(Gdx.files.internal("console.fnt"));
 		sb = new SpriteBatch();
 		
-		input =new StringBuilder("");
+		input = new String();
 		consoleData = new Array<String>();
 		consoleData.add("#!/bin/ld");
 		consoleData.add("welcome dude");
@@ -45,9 +45,9 @@ public class MenuScreen extends InputScreen {
 		int firstIndex = Math.max(consoleData.size-24, 0);
 		for(int i = firstIndex; i < Math.min(firstIndex + 24, consoleData.size); i++){
 			if(i == currentInput)
-				consoleFont.draw(sb, consoleData.get(i) + input.toString(), 3, Gdx.graphics.getHeight() - 3 - i*17);
+				consoleFont.draw(sb, consoleData.get(i) + input.toString(), 3, Gdx.graphics.getHeight() - 3 - (i-firstIndex)*17);
 			else 
-				consoleFont.draw(sb, consoleData.get(i), 3, Gdx.graphics.getHeight() - 3 - i*17);
+				consoleFont.draw(sb, consoleData.get(i), 3, Gdx.graphics.getHeight() - 3 - (i-firstIndex)*17);
 		}
 		sb.end();
 
@@ -55,33 +55,35 @@ public class MenuScreen extends InputScreen {
 	
 	@Override
 	public boolean keyTyped(char character) {
-		if(character != '\b')
-			input.append(character);
-		else if(input.length()>0)
-			input.deleteCharAt(input.length()-1);
-		else return false;
+		if(character == '\b' && input.length()>0)
+			input = input.substring(0, input.length()-1);
+		else if(character == '\r')
+			processCommand(input.toString());
+		else
+			input += (character);
 		return true;
 	};
 
-	
-	@Override
-	public boolean keyDown(int keycode) {
-		if(keycode == Input.Keys.ENTER)
-			processCommand(input.toString());
-		else return false;
-		return true;
-	};
+
 	
 	private void processCommand(String command) {
-		consoleData.set(currentInput, consoleData.get(currentInput)+ command );
-		if(command.equals("quit"))
+		
+		if(command.equals("quit") || command.equals("exit"))
 			Gdx.app.exit();
 		else if (command.equals("play"))
 			exit();
 		else{
-			consoleData.add("come on dude...");
-			consoleData.add("$");
+			consoleData.set(currentInput, consoleData.get(currentInput)+ command );
+			if(command.equals("rm") || command.equals("rm -rf") 
+					||command.equals("rm -rf /") || command.equals("while[true]") || command.equals("help"))
+				consoleData.add("I'm sorry Dave. I'm afraid I can't do that.");
+			else if(command.equals("dance"))
+				consoleData.add("I AM NOT UR DANCE SLAVE BRO. call 8018010781 for a prize.");
+			else
+				consoleData.add("come on dude...");
 			consoleData.add("someguy@a-computer$ ");
+			input = "";
+			currentInput = consoleData.size-1;
 		}
 		
 	}
