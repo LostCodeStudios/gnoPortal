@@ -27,10 +27,12 @@ public class GnoPortal extends Game {
 		
 		title = "Ninja Space Pirate";
 		
-		landscapeMode = false;
+		landscapeMode = true;
+		super.width = 462;
+		super.height = 722;
+		
 		
 		super.create();
-
 		
 		getScreenManager().addScreen(new GameScreen(this) {
 			
@@ -76,11 +78,13 @@ public class GnoPortal extends Game {
 				
 			}
 		});
+		
+		
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.1845f, 0.0390625f, .140625f, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
