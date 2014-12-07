@@ -44,7 +44,7 @@ public class PongWorld extends EntityWorld {
 	@Override
 	protected void buildTemplates() {
 		this.addTemplate("paddle", new PaddleTemplate());
-		this.addTemplate("body", new BallTemplate());
+		this.addTemplate("ball", new BallTemplate());
 	}
 	
 	@Override
