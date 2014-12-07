@@ -73,7 +73,23 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
+		Vector2 pos = world.toWorldCoordinates(new Vector2(screenX, screenY));
+		
+		if (pointer == 0) {
+			// left click?
+			
+			// TODO delete the original if one exists
+			
+			world.createEntity("portal", "player", pos, "blue");
+		}
+		else if (pointer == 1) {
+			// right click?
+			
+			// TODO delete original
+			
+			world.createEntity("portal", "player", pos, "orange");
+		}
+		
 		return super.touchDown(screenX, screenY, pointer, button);
 	}
 

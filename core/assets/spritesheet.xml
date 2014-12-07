@@ -4,5 +4,7 @@
 <rect key="ball">26, 1, 16, 16</rect>
 <rect key="pixel">11, 47, 1, 1</rect>
 <rect key="crosshair">46, 4, 16, 16</rect>
+<rect key="portalorange">88, 3, 18, 18</rect>
+<rect key="portalblue">68, 3, 18, 18</rect>
 <rect key="paddle">1, 1, 24, 139</rect>
 </SpriteSheet>
