@@ -8,7 +8,6 @@ import java.io.IOException;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
@@ -17,6 +16,7 @@ import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.AISystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
+import com.lostcodestudios.gnoPortal.gameplay.entities.systems.PortalSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.TargetSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BulletTemplate;
@@ -75,6 +75,7 @@ public class PongWorld extends EntityWorld {
 		systems.addSystem(inputSystem = new InputSystem(input, Ball));
 		systems.addSystem(new TargetSystem());
 		systems.addSystem(new AISystem());
+		systems.addSystem(new PortalSystem());
 	}
 
 	@Override

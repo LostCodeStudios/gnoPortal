@@ -7,14 +7,15 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.entities.components.generic.TriggerZone;
 import com.lostcode.javalib.entities.components.physical.Body;
-import com.lostcode.javalib.entities.components.physical.Sensor;
 import com.lostcode.javalib.entities.components.physical.Transform;
+import com.lostcode.javalib.entities.components.physical.Velocity;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 
 public class PortalTemplate implements EntityTemplate {
 
+	float portalC = 0;
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -58,12 +59,15 @@ public class PortalTemplate implements EntityTemplate {
 				Entity other = world.tryGetEntity(antiColor, group, "");
 				if(other != null && elol.getTag().equals("ball"))
 				{
+					portalC++;
 					
 					//CAREFUL IF WE HAVE OTHER MOVING OBJECTS BEING DETECTED
 					//THEY WILL BE PORTED
 					Transform bb = elol.getComponent(Transform.class);
 					Transform ob = other.getComponent(Transform.class);
 					bb.setPosition(ob.getPosition());
+					Velocity bv = elol.getComponent(Velocity.class);
+					bv.setLinearVelocity(bv.getLinearVelocity().cpy().nor().scl((float) (BallTemplate.VELOCITY*Math.pow(1.2, portalC))));
 					
 					other.delete();
 					e.delete();
