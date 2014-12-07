@@ -15,6 +15,7 @@ import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 
 /**
  * @author william
@@ -45,6 +46,7 @@ public class PongWorld extends EntityWorld {
 	protected void buildTemplates() {
 		this.addTemplate("paddle", new PaddleTemplate());
 		this.addTemplate("ball", new BallTemplate());
+		this.addTemplate("wall",new WallTemplate());
 	}
 	
 	@Override
@@ -52,6 +54,7 @@ public class PongWorld extends EntityWorld {
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
 		this.createEntity("ball", "left");
+		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
 	}
 	
 	/* (non-Javadoc)
