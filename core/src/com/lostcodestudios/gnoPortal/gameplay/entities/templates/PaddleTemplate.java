@@ -53,6 +53,8 @@ public class PaddleTemplate implements EntityTemplate {
 		if (side.equals("right")) {
 			AI ai = new AI();
 			
+			ai.target = (Entity) args[1];
+			
 			e.addComponent(ai);
 		}
 		
