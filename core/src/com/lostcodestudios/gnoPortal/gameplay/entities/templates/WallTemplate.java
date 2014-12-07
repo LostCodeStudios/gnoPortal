@@ -32,6 +32,8 @@ public class WallTemplate implements EntityTemplate{
 		
 		sprite.setOrigin(new Vector2(r.width/2f, r.height/2f));
 		
+		sprite.setLayer(0);
+		
 		e.addComponent(sprite);
 		
 		PolygonShape shape = new PolygonShape();

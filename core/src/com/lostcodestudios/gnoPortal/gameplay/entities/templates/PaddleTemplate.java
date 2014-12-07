@@ -25,6 +25,8 @@ public class PaddleTemplate implements EntityTemplate {
 		
 		
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "paddle");
+		
+		sprite.setLayer(3);
 		e.addComponent(sprite);
 		
 		PolygonShape shape = new PolygonShape();
