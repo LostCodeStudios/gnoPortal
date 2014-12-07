@@ -44,7 +44,7 @@ public class PaddleTemplate implements EntityTemplate {
 		}
 
 		
-		Body body = new Body(world, e, BodyType.DynamicBody, shape, new Vector2(posX, posY));
+		Body body = new Body(world, e, BodyType.KinematicBody, shape, new Vector2(posX, posY));
 		e.addComponent(body);
 		return e;
 	}

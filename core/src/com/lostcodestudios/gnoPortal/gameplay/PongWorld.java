@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
@@ -27,6 +28,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 public class PongWorld extends EntityWorld {
 
 	public static final float PADDLE_SPEED = 25f;
+	private Entity ball;
 	
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
@@ -56,23 +58,24 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("portal", new PortalTemplate());
 	}
 	
+	private InputSystem inputSystem;
 	@Override
 	protected void buildSystems() {
 		super.buildSystems();
 		
-		systems.addSystem(new InputSystem(input));
+		systems.addSystem(inputSystem = new InputSystem(input, ball));
 	}
 
 	@Override
 	protected void buildEntities() {
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
-		this.createEntity("ball", "left");
+		inputSystem.Ball = this.createEntity("ball", "left");
 		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
 		this.createEntity("wall", "bottomWall", new Rectangle(0,-462/2f,722f,24));
 		this.createEntity("wall", "top", new Rectangle(0,462/2f,722f,24));
-		this.createEntity("wall", "leftWall", new Rectangle(-722f/2,0,24,462f));
-		this.createEntity("wall", "rightWall", new Rectangle(722f/2,0,24,462f));
+		this.createEntity("wall", "leftWall", new Rectangle(-722f/2-6,0,24,462f));
+		this.createEntity("wall", "rightWall", new Rectangle(722f/2+6,0,24,462f));
 		this.createEntity("crosshair");
 	}
 	
