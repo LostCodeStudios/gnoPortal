@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
+import com.lostcode.javalib.entities.components.generic.TriggerZone;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Sensor;
 import com.lostcode.javalib.entities.components.physical.Transform;
@@ -21,7 +22,7 @@ public class PortalTemplate implements EntityTemplate {
 	}
 
 	@Override
-	public Entity buildEntity(Entity e, EntityWorld world, Object... args) {
+	public Entity buildEntity(final Entity e, EntityWorld world, Object... args) {
 		//args
 		// 0: group
 		// 1: position
@@ -43,24 +44,27 @@ public class PortalTemplate implements EntityTemplate {
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(Convert.pixelsToMeters(sprite.getWidth() / 2), Convert.pixelsToMeters(sprite.getHeight() / 2));
 		
-		Body body = new Body(world, e, BodyType.StaticBody, shape, (Vector2) args[1]);
+		Body body = new Body(world, e, BodyType.StaticBody, (Vector2) args[1]);
 		e.addComponent(body);
 		
-		Sensor sensor = new Sensor(e) {
+		TriggerZone sensor = new TriggerZone(e, shape) {
 
 			@Override
-			public void onDetected(Entity e, EntityWorld world) {
-				super.onDetected(e, world);
+			public void onDetected(Entity elol, EntityWorld world) {
+				super.onDetected(elol, world);
 				
 				Entity other = world.tryGetEntity(antiColor, group, "");
-				if(other != null && e.getTag().equals("ball"))
+				if(other != null && elol.getTag().equals("ball"))
 				{
 					
 					//CAREFUL IF WE HAVE OTHER MOVING OBJECTS BEING DETECTED
 					//THEY WILL BE PORTED
-					Transform bb = e.getComponent(Transform.class);
+					Transform bb = elol.getComponent(Transform.class);
 					Transform ob = other.getComponent(Transform.class);
 					bb.setPosition(ob.getPosition());
+					
+					other.delete();
+					e.delete();
 					
 					//POSSIBLY PLAY A TELEPORT PARTICLE EFFECT
 				}
