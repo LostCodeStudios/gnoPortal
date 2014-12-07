@@ -13,8 +13,6 @@ import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 
 public class BallTemplate implements EntityTemplate {
-	private static final Vector2 BODY_POSITION = new Vector2(0, -5);
-	private static final float BODY_RADIUS = 4f;
 	
 	@Override
 	public void dispose() {
@@ -40,7 +38,7 @@ public class BallTemplate implements EntityTemplate {
 		fd.shape = shape;
 		fd.restitution = 1;
 		fd.friction=0;
-		bd.position.set(BODY_POSITION.cpy());
+		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 48f, 0)));
 		bd.type = BodyType.DynamicBody;
 		bd.allowSleep = false;
 		
