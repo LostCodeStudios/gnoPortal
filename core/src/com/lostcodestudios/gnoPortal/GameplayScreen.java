@@ -14,9 +14,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.lostcode.javalib.Game;
-import com.lostcode.javalib.entities.components.physical.Transform;
 import com.lostcode.javalib.states.InputScreen;
-import com.lostcode.javalib.utils.Convert;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
 public class GameplayScreen extends InputScreen {
@@ -27,7 +25,11 @@ public class GameplayScreen extends InputScreen {
 	SpriteBatch sb;
 	Array<String> consoleData;		
 	
-
+	String[] program;
+	
+	int ticker = 0;
+	int lineOfCode = 0;
+	int index = 0;
 	ShaderProgram blurShader;
 	FrameBuffer blurTargetA, blurTargetB;
 	TextureRegion fboRegion;
@@ -45,8 +47,15 @@ public class GameplayScreen extends InputScreen {
 		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy());
 		
 		consoleData = new Array<String>();
-		consoleData.add("tits");
-		consoleData.add("boobs");
+		consoleData.add("Loading JVM v7.0.1...");
+		consoleData.add("someguy@a-computer$java -jar gnoPong.jar");
+		consoleData.add("Loading JavaLib v1.12.1...");
+		consoleData.add("ERROR: GAMEDATA OVERFLOW");
+		consoleData.add("       -> MEMORY MAXIMUM REACHED;");
+		consoleData.add("       -> GAME WILL BE RENDERED IN ONE SCREEN;");
+		consoleData.add("");
+		consoleData.add("=======DUMPING DATA=======");
+		consoleData.add("");
 		consoleFont = new BitmapFont(Gdx.files.internal("console.fnt"));
 		
 		//important since we aren't using some uniforms and attributes that SpriteBatch expects
@@ -75,12 +84,32 @@ public class GameplayScreen extends InputScreen {
 		sb = new SpriteBatch();
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cam.setToOrtho(false);
+		
+		program = Gdx.files.internal("code.txt").readString().split("\n");
 	}
 
 	@Override
 	public void render(float delta) {
 		
 		//update cionsike
+		if(ticker <2)
+			ticker++;
+		else
+		{
+			ticker =0;
+			if(index < program[lineOfCode].length())
+				consoleData.set(consoleData.size-1, consoleData.get(consoleData.size-1).concat(new Character(program[lineOfCode].charAt(index++)).toString()));
+			else{
+				consoleData.add("");
+				if(lineOfCode >= program.length)
+					lineOfCode = 0;
+				else
+					lineOfCode++;
+				index = 0;
+			}
+		
+		}
+		
 		
 		//render console
 		this.renderConsole();
@@ -151,7 +180,7 @@ public class GameplayScreen extends InputScreen {
 	
 	public void renderConsole(){
 		Vector2 ballGradient;
-			ballGradient = new Vector2(.25f, .25f);
+			ballGradient = new Vector2(.34f, .34f);
 				
 		
 		//Start rendering to an offscreen color buffer
