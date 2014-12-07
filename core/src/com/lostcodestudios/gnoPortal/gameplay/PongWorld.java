@@ -13,7 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 
@@ -23,6 +25,8 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
  */
 public class PongWorld extends EntityWorld {
 
+	public static final float PADDLE_SPEED = 25f;
+	
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
 		// TODO Auto-generated constructor stub
@@ -47,14 +51,23 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("paddle", new PaddleTemplate());
 		this.addTemplate("ball", new BallTemplate());
 		this.addTemplate("wall",new WallTemplate());
+		this.addTemplate("crosshair", new CrosshairTemplate());
 	}
 	
+	@Override
+	protected void buildSystems() {
+		super.buildSystems();
+		
+		systems.addSystem(new InputSystem(input));
+	}
+
 	@Override
 	protected void buildEntities() {
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
 		this.createEntity("ball", "left");
 		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
+		this.createEntity("crosshair");
 	}
 	
 	/* (non-Javadoc)
@@ -62,7 +75,7 @@ public class PongWorld extends EntityWorld {
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return Convert.pixelsToMeters(new Rectangle(-722f/2, -462f/2, 722f/2, 462f/2));
+		return Convert.pixelsToMeters(new Rectangle(-722f/2, -462f/2, 722f, 462f));
 	}
 
 	public void enableDebug(){
