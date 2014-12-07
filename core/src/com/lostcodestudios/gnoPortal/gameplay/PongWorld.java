@@ -24,6 +24,8 @@ public class PongWorld extends EntityWorld {
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
 		// TODO Auto-generated constructor stub
+		
+		debugView.enabled = true;
 	}
 
 	/* (non-Javadoc)
@@ -56,4 +58,7 @@ public class PongWorld extends EntityWorld {
 		return Convert.pixelsToMeters(new Rectangle(-462/2, -722/2, 462/2, 722/2));
 	}
 
+	public void enableDebug(){
+		debugView.enabled = true;
+	}
 }

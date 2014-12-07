@@ -11,8 +11,6 @@ import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 
 public class PaddleTemplate implements EntityTemplate {
-	private static final Vector2 BODY_POSITION = new Vector2(0, -5);
-	
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -29,11 +27,15 @@ public class PaddleTemplate implements EntityTemplate {
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "paddle");
 		e.addComponent(sprite);
 		
-		 PolygonShape shape = new PolygonShape();
+		PolygonShape shape = new PolygonShape();
 		 
-		shape.setAsBox(Convert.pixelsToMeters(sprite.getWidth()/2),
-				Convert.pixelsToMeters(sprite.getHeight()/2));
-		Body body = new Body(world, e, BodyType.DynamicBody, shape, BODY_POSITION);
+		shape.setAsBox(Convert.pixelsToMeters(sprite.getWidth()/2f),
+				Convert.pixelsToMeters(sprite.getHeight()/2f));
+		
+		float posX = 0f;
+		float posY = 0f;
+		
+		Body body = new Body(world, e, BodyType.DynamicBody, shape, new Vector2(posX, posY));
 		e.addComponent(body);
 		return e;
 	}

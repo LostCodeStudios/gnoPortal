@@ -22,7 +22,7 @@ public class GameplayScreen extends InputScreen {
 	public GameplayScreen(Game game) {
 		super(game);
 		
-		camera = new OrthographicCamera(56, 96);
+		camera = new OrthographicCamera(722, 462);
 		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy());
 	}
 
