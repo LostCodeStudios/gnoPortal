@@ -18,6 +18,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PortalTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
 
 /**
@@ -54,6 +55,7 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("ball", new BallTemplate());
 		this.addTemplate("wall",new WallTemplate());
 		this.addTemplate("crosshair", new CrosshairTemplate());
+		this.addTemplate("portal", new PortalTemplate());
 	}
 	
 	private InputSystem inputSystem;

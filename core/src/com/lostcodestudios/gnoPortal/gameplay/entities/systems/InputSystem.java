@@ -1,5 +1,7 @@
 package com.lostcodestudios.gnoPortal.gameplay.entities.systems;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Vector2;
@@ -89,10 +91,36 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 			ballfired = true;
 			return true;
 		}
+		else {
 		
-		return false;
-	}
 
+			Vector2 pos = world.toWorldCoordinates(new Vector2(screenX, screenY));
+			
+			if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+				// left click?
+				
+				Entity e = world.tryGetEntity("blue", "player", "portal");
+				
+				if (e != null)
+					e.delete();
+				
+				world.createEntity("portal", "player", pos, "blue");
+			}
+			if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
+				// right click?
+				
+				Entity e = world.tryGetEntity("orange", "player", "portal");
+				
+				if (e != null)
+					e.delete();
+				
+				world.createEntity("portal", "player", pos, "orange");
+			}
+			
+			return false;	
+		
+		}
+	}
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
 		Vector2 pos = world.toWorldCoordinates(new Vector2(screenX, screenY));
