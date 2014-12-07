@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 
@@ -22,6 +23,8 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
  */
 public class PongWorld extends EntityWorld {
 
+	public static final float PADDLE_SPEED = 25f;
+	
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
 		// TODO Auto-generated constructor stub
@@ -48,6 +51,13 @@ public class PongWorld extends EntityWorld {
 	}
 	
 	@Override
+	protected void buildSystems() {
+		super.buildSystems();
+		
+		systems.addSystem(new InputSystem(input));
+	}
+
+	@Override
 	protected void buildEntities() {
 		this.createEntity("paddle", "left");
 		this.createEntity("paddle", "right");
@@ -59,7 +69,7 @@ public class PongWorld extends EntityWorld {
 	 */
 	@Override
 	public Rectangle getBounds() {
-		return Convert.pixelsToMeters(new Rectangle(-722f/2, -462f/2, 722f/2, 462f/2));
+		return Convert.pixelsToMeters(new Rectangle(-722f/2, -462f/2, 722f, 462f));
 	}
 
 	public void enableDebug(){

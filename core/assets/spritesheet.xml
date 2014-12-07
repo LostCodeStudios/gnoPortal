@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <SpriteSheet>
 <texture>sprites.png</texture>
-<rect key="ball">26, 1, 24, 24</rect>
+<rect key="ball">26, 1, 16, 16</rect>
+<rect key="pixel">11, 47, 1, 1</rect>
+<rect key="crosshair">46, 4, 16, 16</rect>
 <rect key="paddle">1, 1, 24, 139</rect>
 </SpriteSheet>

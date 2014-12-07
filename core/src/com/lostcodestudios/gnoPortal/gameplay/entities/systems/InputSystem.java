@@ -2,18 +2,24 @@ package com.lostcodestudios.gnoPortal.gameplay.entities.systems;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
+import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
 public class InputSystem extends com.lostcode.javalib.entities.systems.InputSystem {
 
+	Vector2 leftPaddleVelocity = new Vector2();
+	
 	public InputSystem(InputMultiplexer input) {
 		super(input);
 	}
 
 	@Override
 	protected void process(Entity e) {
-		// TODO Auto-generated method stub
+		leftPaddleVelocity.scl(PongWorld.PADDLE_SPEED);
+		((Body) e.getComponent(Body.class)).setLinearVelocity(leftPaddleVelocity);
+		
 		super.process(e);
 	}
 
@@ -28,12 +34,31 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 			((PongWorld)world).enableDebug();
 			return true;
 		}
-		return super.keyDown(keycode);
+		
+		if (keycode == Keys.W)
+		{
+			leftPaddleVelocity.y = 1;
+			return true;
+		}
+		else if (keycode == Keys.S)
+		{
+			leftPaddleVelocity.y = -1;
+			return true;
+		}
+		
+
+		
+		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+		if (keycode == Keys.W || keycode == Keys.S)
+		{
+			leftPaddleVelocity.y = 0;
+			return true;
+		}
+		
 		return super.keyUp(keycode);
 	}
 
