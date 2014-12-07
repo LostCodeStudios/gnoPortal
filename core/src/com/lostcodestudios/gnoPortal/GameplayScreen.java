@@ -43,13 +43,14 @@ public class GameplayScreen extends InputScreen {
 	 * Makes a GameplayScreen.
 	 * @param game
 	 */
-	public GameplayScreen(Game game) {
+	public GameplayScreen(Game game, int level) {
 		super(game);
 		
 		font = new BitmapFont(Gdx.files.internal("console.fnt"));
 		
 		camera = new OrthographicCamera(722, 462);
-		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy());
+		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy(), level);
+		world.buildLevel(level);
 		
 		consoleData = new Array<String>();
 		consoleData.add("Loading JVM v7.0.1...");
