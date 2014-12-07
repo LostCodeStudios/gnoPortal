@@ -9,6 +9,7 @@ import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcodestudios.gnoPortal.gameplay.entities.components.AI;
 
 public class PaddleTemplate implements EntityTemplate {
 	@Override
@@ -48,6 +49,15 @@ public class PaddleTemplate implements EntityTemplate {
 		
 		Body body = new Body(world, e, BodyType.KinematicBody, shape, new Vector2(posX, posY));
 		e.addComponent(body);
+		
+		if (side.equals("right")) {
+			AI ai = new AI();
+			
+			ai.target = (Entity) args[1];
+			
+			e.addComponent(ai);
+		}
+		
 		return e;
 	}
 

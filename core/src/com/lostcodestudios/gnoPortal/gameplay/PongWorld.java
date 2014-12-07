@@ -73,14 +73,17 @@ public class PongWorld extends EntityWorld {
 		
 		systems.addSystem(inputSystem = new InputSystem(input, Ball));
 		systems.addSystem(new TargetSystem());
+		systems.addSystem(new AISystem());
 	}
 
 	@Override
 	protected void buildEntities() {
 		this.createEntity("desktop");
-		this.createEntity("paddle", "left");
-		this.createEntity("paddle", "right");
+		
 		Ball = inputSystem.Ball = this.createEntity("ball", "left");
+		
+		this.createEntity("paddle", "left");
+		this.createEntity("paddle", "right", Ball);
 		this.createEntity("wall", "testWall", new Rectangle(0,0,100,100));
 		this.createEntity("wall", "bottomWall", new Rectangle(0,-462/2f-8,722f,24));
 		this.createEntity("wall", "top", new Rectangle(0,462/2f+8,722f,24));
