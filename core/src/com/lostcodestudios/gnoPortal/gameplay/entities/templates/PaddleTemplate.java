@@ -35,6 +35,15 @@ public class PaddleTemplate implements EntityTemplate {
 		float posX = 0f;
 		float posY = 0f;
 		
+		if (side.equals("left")) {
+			posX = -Convert.pixelsToMeters(722f/2f) + 3f;
+		}
+		
+		if (side.equals("right")) {
+			posX = Convert.pixelsToMeters(722f/2f) - 3f;
+		}
+
+		
 		Body body = new Body(world, e, BodyType.DynamicBody, shape, new Vector2(posX, posY));
 		e.addComponent(body);
 		return e;

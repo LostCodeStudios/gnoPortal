@@ -19,7 +19,7 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	@Override
 	public boolean canProcess(Entity e) {
-		return e.getTag().equals("paddleLeft");
+		return e.getTag().equals("paddleleft");
 	}
 
 	@Override
