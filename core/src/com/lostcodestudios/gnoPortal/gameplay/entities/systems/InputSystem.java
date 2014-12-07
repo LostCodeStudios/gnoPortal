@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Particle;
+import com.lostcode.javalib.entities.components.physical.Transform;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 
@@ -98,35 +99,26 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 			
 			if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
 				// left click?
-				Entity e = null;
-				
-				do {
-					 e = world.tryGetEntity("blue", "player", "portal");
-				
-					if (e != null)
-						e.delete();
-					else
-						System.out.println("oops");
-				} while (e != null);	
 				
 				
-				world.createEntity("portal", "player", pos, "blue");
+				Entity player = world.tryGetEntity("paddleleft", "paddles", "player");
+				
+				Transform t = player.getComponent(Transform.class);
+				Vector2 playerPos = t.getPosition();
+				
+				world.createEntity("bullet", "blue", playerPos, pos);
 			}
 			if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
 				// right click?
 				
-				Entity e = null;
 				
-				do {
-					 e = world.tryGetEntity("orange", "player", "portal");
 				
-					if (e != null)
-						e.delete();
-					else
-						System.out.println("oops");
-				} while (e != null);	
+Entity player = world.tryGetEntity("paddleleft", "paddles", "player");
 				
-				world.createEntity("portal", "player", pos, "orange");
+				Transform t = player.getComponent(Transform.class);
+				Vector2 playerPos = t.getPosition();
+				
+				world.createEntity("bullet", "orange", playerPos, pos);
 			}
 			
 			return false;	

@@ -3,6 +3,7 @@ package com.lostcodestudios.gnoPortal;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap.Format;
@@ -44,6 +45,8 @@ public class GameplayScreen extends InputScreen {
 	 */
 	public GameplayScreen(Game game) {
 		super(game);
+		
+		font = new BitmapFont(Gdx.files.internal("console.fnt"));
 		
 		camera = new OrthographicCamera(722, 462);
 		world = new PongWorld(game.getInput(), camera, Vector2.Zero.cpy());
@@ -130,10 +133,30 @@ public class GameplayScreen extends InputScreen {
 			FBO_SIZE = (int) (1024*1f);
 			offset = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()).scl(1f/2.33f).add(180,140);
 
-			//game.getScreenManager().addScreen(new GameOverScreen(game, info.score));
+			elapsed += Gdx.graphics.getDeltaTime();
+			
+			if (elapsed > blink * 2) {
+				elapsed -= blink * 2;
+			}
+			
+			if (elapsed < blink) {
+				batchBatch.begin();
+				
+				font.setColor(Color.YELLOW);
+				font.draw(batchBatch, "You BROKE THE GAME!!!!1", 0, 16);
+				
+				batchBatch.end();
+				
+
+			}
 		}
 	}
 
+	SpriteBatch batchBatch = new SpriteBatch();
+	BitmapFont font;
+	float elapsed = 0f;
+	float blink = 0.75f;
+	
 	@Override
 	public void resize(int width, int height) {
 		

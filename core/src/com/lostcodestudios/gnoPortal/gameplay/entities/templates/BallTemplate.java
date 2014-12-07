@@ -1,5 +1,6 @@
 package com.lostcodestudios.gnoPortal.gameplay.entities.templates;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -12,6 +13,7 @@ import com.lostcode.javalib.entities.components.generic.Health;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Collidable;
 import com.lostcode.javalib.entities.components.render.Sprite;
+import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 
@@ -37,6 +39,15 @@ public class BallTemplate implements EntityTemplate {
 		sprite.setLayer(2);
 		
 		e.addComponent(sprite);
+		
+		e.onDeleted.addCallback("key", new EventCallback() {
+
+			@Override
+			public void invoke(Entity e, Object... args) {
+				Gdx.app.exit();
+			}
+			
+		});
 		
 		 CircleShape shape = new CircleShape();
 		 shape.setRadius(Convert.pixelsToMeters(sprite.getWidth()/2f));

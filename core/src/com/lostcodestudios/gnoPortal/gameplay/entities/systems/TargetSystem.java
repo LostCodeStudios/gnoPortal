@@ -24,7 +24,7 @@ public class TargetSystem extends EntitySystem {
 		Transform t = e.getComponent(Transform.class);
 
 		float dist = tar.cpy().sub(t.getPosition()).len();
-		if (dist < 0.01f) { //epsilon
+		if (dist < 1f) { //epsilon
 			// reached target
 			
 			pos.onReachedTarget(world, e);
