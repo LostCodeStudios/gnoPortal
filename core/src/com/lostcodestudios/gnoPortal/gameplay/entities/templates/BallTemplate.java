@@ -7,7 +7,10 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
+import com.lostcode.javalib.entities.components.ComponentManager;
+import com.lostcode.javalib.entities.components.generic.Health;
 import com.lostcode.javalib.entities.components.physical.Body;
+import com.lostcode.javalib.entities.components.physical.Collidable;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
@@ -46,6 +49,41 @@ public class BallTemplate implements EntityTemplate {
 		bd.fixedRotation = false;
 		Body body = new Body(world, e, bd, fd);
 		e.addComponent(body);
+		
+		e.addComponent(new Collidable(){
+			@Override
+			public void onBeginContact(Entity container, Entity victim) {
+				if(victim.hasComponent(Health.class)){
+					Health h = victim.getComponent(Health.class);
+					h.drain(10);
+					
+				}
+				System.out.println("Collision");
+				super.onEndContact(container, victim);
+			}
+			@Override 
+			public float continueCollision(Entity container, Entity victim) {
+				if(victim.hasComponent(Health.class)){
+					Health h = victim.getComponent(Health.class);
+					h.drain(10);
+					if(h.getCurrentValue() <= 0)
+						return 0;
+				}
+				return 1;
+			}
+			@Override
+			public void onAdd(ComponentManager container) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onRemove(ComponentManager container) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		return e;
 	}
 

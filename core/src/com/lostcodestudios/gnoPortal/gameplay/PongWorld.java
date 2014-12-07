@@ -14,6 +14,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.GameplayScreen;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTemplate;
@@ -29,11 +30,11 @@ public class PongWorld extends EntityWorld {
 
 	public static final float PADDLE_SPEED = 25f;
 	public Entity Ball;
+
 	
 	public PongWorld(InputMultiplexer input, Camera camera, Vector2 gravity) {
 		super(input, camera, gravity);
 		// TODO Auto-generated constructor stub
-		
 		debugView.enabled = true;
 	}
 
