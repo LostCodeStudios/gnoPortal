@@ -131,6 +131,7 @@ public class GameplayScreen extends InputScreen {
 			System.out.println("hi");
 			((OrthographicCamera)world.getCamera()).zoom = zoom;
 			cam.zoom = 1.34f;
+			world.setTimeCoefficient(0.25f);
 			
 			FBO_SIZE = (int) (1024*1f);
 			offset = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()).scl(1f/2.33f).add(180,140);

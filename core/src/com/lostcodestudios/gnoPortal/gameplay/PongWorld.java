@@ -91,8 +91,8 @@ public class PongWorld extends EntityWorld {
 		this.createEntity("wall", "leftWall", new Rectangle(-722f/2-8,0,24,462f));
 		this.createEntity("wall", "rightWall", new Rectangle(722f/2+8,0,24,462f));
 		this.createEntity("crosshair");
-		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
-		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
+//		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
+//		this.createEntity("trail", new Vector2(2,2), Color.RED, new Float(10f));
 	}
 	
 	/* (non-Javadoc)
