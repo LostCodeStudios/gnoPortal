@@ -13,7 +13,7 @@ import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
 
 public class BallTemplate implements EntityTemplate {
-	
+	public static final  float VELOCITY = 20;
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -23,6 +23,8 @@ public class BallTemplate implements EntityTemplate {
 	@Override
 	public Entity buildEntity(Entity e, EntityWorld world, Object... args) {
 		String side = (String)args[0];
+		
+		
 		
 		e.init("ball", "balls", "ball");
 		
@@ -36,14 +38,12 @@ public class BallTemplate implements EntityTemplate {
 		BodyDef bd = new BodyDef();
 		FixtureDef fd = new FixtureDef();
 		fd.shape = shape;
-		fd.restitution = 1;
+		fd.restitution = 1.01f;
 		fd.friction=0;
 		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 60f, 0)));
 		bd.type = BodyType.DynamicBody;
 		bd.allowSleep = false;
-		
-		
-		
+
 		Body body = new Body(world, e, bd, fd);
 		e.addComponent(body);
 		return e;

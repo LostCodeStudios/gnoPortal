@@ -5,17 +5,20 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
-import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 import com.lostcode.javalib.entities.components.physical.Particle;
+import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 
 public class InputSystem extends com.lostcode.javalib.entities.systems.InputSystem {
 
 	Vector2 leftPaddleVelocity = new Vector2();
 	Vector2 crosshairPosition = new Vector2();
+	public Entity Ball;
 	boolean ballfired =false;
 	
-	public InputSystem(InputMultiplexer input) {
+	public InputSystem(InputMultiplexer input, Entity ball) {
 		super(input);
+		this.Ball = ball;
 	}
 
 	@Override
@@ -28,6 +31,7 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 		else if (e.getTag().equals("crosshair")) {
 			((Particle) e.getComponent(Particle.class)).setPosition(crosshairPosition);
 		}
+		
 		
 		super.process(e);
 	}
@@ -73,8 +77,20 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Auto-generated method stub
-		return super.touchDown(screenX, screenY, pointer, button);
+		if(!ballfired){
+			Vector2 pos = world.toWorldCoordinates(new Vector2(screenX, screenY));
+			
+			Body bb = Ball.getComponent(Body.class);
+			
+			pos.sub(bb.getPosition());
+			pos.nor();
+			
+			bb.setLinearVelocity(pos.cpy().scl(BallTemplate.VELOCITY));
+			ballfired = true;
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
