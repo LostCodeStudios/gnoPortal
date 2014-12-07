@@ -1,14 +1,13 @@
 package com.lostcodestudios.gnoPortal.gameplay.entities.systems;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
-import com.lostcode.javalib.entities.EntityWorld;
-import com.lostcode.javalib.entities.components.physical.Transform;
-import com.lostcode.javalib.entities.components.physical.Velocity;
+import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.systems.EntitySystem;
+import com.lostcode.javalib.utils.Convert;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 import com.lostcodestudios.gnoPortal.gameplay.entities.components.AI;
-import com.lostcodestudios.gnoPortal.gameplay.entities.components.TargetPosition;
 
 public class AISystem extends EntitySystem {
 
@@ -21,52 +20,70 @@ public class AISystem extends EntitySystem {
 	@Override
 	protected void process(Entity e) {
 		AI ai = e.getComponent(AI.class);
+		Body target = ai.target.getComponent(Body.class);
+		Body eb = e.getComponent(Body.class);
 		
-		Vector2 cv = ((Velocity)ai.target.getComponent(
-				Velocity.class)).getLinearVelocity();
-		Vector2 cp = ((Transform)ai.target.getComponent(
-				Transform.class)).getPosition();
-		
-		Vector2 pv = ((Velocity)e.getComponent(
-				Velocity.class)).getLinearVelocity();
-		Vector2 pp = ((Transform)e.getComponent(
-				Transform.class)).getPosition();
-		
-		float distance = pp.x - cp.x;
-		float time = distance / cv.x;
-		
-		if(distance < 46){
-		if (cp.y + time * cv.y > pp.y + time * (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED
-				&& cp.y - time * cv.y > pp.y + time * (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED){
-		} else
-		{
-			if(cp.y - time * cv.y > pp.y + time * (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED)
-			{
-				System.out.println(time);
-				if(Math.abs(pp.y - (time*cv.y + cp.y)) > 6)
-					((Velocity)e.getComponent(
-							Velocity.class)).setLinearVelocity(new Vector2(0, (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)));
-				else
-					((Velocity)e.getComponent(
-							Velocity.class)).setLinearVelocity(new Vector2(0,0));
-			}
-			else if(cp.y + time * cv.y > pp.y + time * (((time*cv.y + cp.y) -pp.y)/Math.abs(time*cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)* PongWorld.PADDLE_SPEED)
-			{
-				System.out.println(time);
-				if(Math.abs(pp.y - (time*-cv.y + cp.y)) > 6)
-					((Velocity)e.getComponent(
-							Velocity.class)).setLinearVelocity(new Vector2(0, (((time*-cv.y + cp.y) -pp.y)/Math.abs(time*-cv.y + cp.y -pp.y)*PongWorld.PADDLE_SPEED)));
-				else
-					((Velocity)e.getComponent(
-							Velocity.class)).setLinearVelocity(new Vector2(0,0));
-			}
-		}
-		}
+		if(dist(eb,target) < 200)
+			defense(eb, target);
 	}
 
+	public float dist(Body a, Body b){
+		return a.getPosition().cpy().sub(b.getPosition()).len();
+	}
+	
+	public Vector2 disp(Body a, Body b){
+		return a.getPosition().cpy().sub(b.getPosition());
+	}
+	
+	public Vector2 disp(Vector2 a, Vector2 b){
+		return a.cpy().sub(b);
+	}
+	
+	public boolean onScreen(Vector2 a){
+		return Convert.pixelsToMeters(new Rectangle(-722/2, -462/2, 722, 462)).contains(a);
+	}
+	
+	public boolean testy(float y){
+		return onScreen(new Vector2(0,x));
+	}
+	
+	public void move(Body b, float y){
+		Vector2 dir = disp(new Vector2(0, y),b.getPosition());
+		if(dir.len() > 10){
+			Vector2 vel = new Vector2(0, Math.signum(dir.y)*PongWorld.PADDLE_SPEED);
+			b.setLinearVelocity(vel);
+		}
+	}
+	
+	
 	@Override
 	public boolean canProcess(Entity e) {
 		return e.hasComponent(AI.class);
+	}
+	
+	public void defense(Body pb, Body bb){
+		Vector2 vb = bb.getLinearVelocity().cpy();
+		Vector2 b = bb.getPosition();
+		Vector2 p = pb.getPosition();
+		
+		//x1
+		float y1 = disp(p,b).x / vb.x * vb.y + b.y;
+		if(testy(y1))
+			move(pb, y1);
+		
+		else
+		{
+			//calculate x2
+			float scY = vb.y > 0 ? 462/2 : -462/2;
+			Vector2 w = new Vector2((scY - b.y)/vb.y*vb.x, scY);
+			float y2 = disp(p,w).x/vb.x*vb.y + w.y;
+			if(testy(y2))
+				move(pb, y2);
+			else
+				move(pb,0);
+		}
+			
+		
 	}
 
 }
