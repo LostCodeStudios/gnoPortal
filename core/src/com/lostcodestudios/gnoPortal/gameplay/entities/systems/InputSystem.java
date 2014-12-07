@@ -6,10 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
+import com.lostcode.javalib.entities.components.physical.Particle;
 
 public class InputSystem extends com.lostcode.javalib.entities.systems.InputSystem {
 
 	Vector2 leftPaddleVelocity = new Vector2();
+	Vector2 crosshairPosition = new Vector2();
 	
 	public InputSystem(InputMultiplexer input) {
 		super(input);
@@ -17,15 +19,21 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	@Override
 	protected void process(Entity e) {
-		leftPaddleVelocity.scl(PongWorld.PADDLE_SPEED);
-		((Body) e.getComponent(Body.class)).setLinearVelocity(leftPaddleVelocity);
+		if (e.getTag().equals("paddleleft")) {
+			leftPaddleVelocity.scl(PongWorld.PADDLE_SPEED);
+			((Body) e.getComponent(Body.class)).setLinearVelocity(leftPaddleVelocity);
+		}
+		
+		else if (e.getTag().equals("crosshair")) {
+			((Particle) e.getComponent(Particle.class)).setPosition(crosshairPosition);
+		}
 		
 		super.process(e);
 	}
 
 	@Override
 	public boolean canProcess(Entity e) {
-		return e.getTag().equals("paddleleft");
+		return e.getTag().equals("paddleleft") || e.getTag().equals("crosshair");
 	}
 
 	@Override
@@ -70,8 +78,13 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
-		// TODO Auto-generated method stub
-		return super.mouseMoved(screenX, screenY);
+		Vector2 pos = world.toWorldCoordinates(new Vector2(screenX, screenY));
+		
+		if (world.getBounds().contains(pos)) {
+			crosshairPosition = pos.cpy();
+		}
+		
+		return true;
 	}
 	
 	
