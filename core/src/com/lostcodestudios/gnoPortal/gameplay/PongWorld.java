@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 
 /**
  * @author william
@@ -37,6 +38,16 @@ public class PongWorld extends EntityWorld {
 		}
 	}
 
+	@Override
+	protected void buildTemplates() {
+		this.addTemplate("paddle", new PaddleTemplate());
+	}
+	
+	@Override
+	protected void buildEntities() {
+		this.createEntity("paddle", "left");
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.lostcode.javalib.entities.EntityWorld#getBounds()
 	 */
