@@ -23,8 +23,10 @@ public class AISystem extends EntitySystem {
 		Body target = ai.target.getComponent(Body.class);
 		Body eb = e.getComponent(Body.class);
 		
-		if(dist(eb,target) < 200)
+		if(dist(eb,target) < 200 && target.getLinearVelocity().x > 0)
 			defense(eb, target);
+		else
+			move(eb,0);
 	}
 
 	public float dist(Body a, Body b){
@@ -44,15 +46,24 @@ public class AISystem extends EntitySystem {
 	}
 	
 	public boolean testy(float y){
-		return onScreen(new Vector2(0,x));
+		return onScreen(new Vector2(0,y));
 	}
 	
 	public void move(Body b, float y){
-		Vector2 dir = disp(new Vector2(0, y),b.getPosition());
-		if(dir.len() > 10){
+		
+		Vector2 pos = b.getPosition().cpy();
+		
+		Vector2 dir = disp(new Vector2(pos.x, y),pos);
+		
+
+		
+	
+		if(dir.len() > 4){
 			Vector2 vel = new Vector2(0, Math.signum(dir.y)*PongWorld.PADDLE_SPEED);
 			b.setLinearVelocity(vel);
 		}
+		else
+			b.setLinearVelocity(Vector2.Zero.cpy());
 	}
 	
 	
