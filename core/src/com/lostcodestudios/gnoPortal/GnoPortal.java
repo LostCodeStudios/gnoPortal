@@ -12,6 +12,7 @@ import com.lostcode.javalib.states.GameScreen;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.LogManager;
 import com.lostcode.javalib.utils.LogManager.LogType;
+import com.lostcode.javalib.utils.SoundManager;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
 public class GnoPortal extends Game {
@@ -31,7 +32,6 @@ public class GnoPortal extends Game {
 		super.width = 462;
 		super.height = 722;
 		
-		
 		super.create();
 		
 		getScreenManager().addScreen(new MenuScreen(this));
@@ -48,7 +48,10 @@ public class GnoPortal extends Game {
 
 	@Override
 	protected void loadSounds() {
-		// TODO Auto-generated method stub
+		SoundManager.addSound("bounce", Gdx.files.internal("bounce.wav"));
+		SoundManager.addSound("portal", Gdx.files.internal("portal.wav"));
+		SoundManager.addSong("melts", Gdx.files.internal("SheMelts.mp3"));
 		
+		SoundManager.playSong("melts", 0.6f, true);
 	}
 }
