@@ -12,39 +12,36 @@ import com.lostcode.javalib.entities.processes.DelayProcess;
 import com.lostcode.javalib.entities.processes.DeletionProcess;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 
-public class PorticleTemplate implements EntityTemplate {
+public class ExplosionTemplate implements EntityTemplate {
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public Entity buildEntity(final Entity e, final EntityWorld world, Object... args) {
-		e.init("", "", "porticle");
+	public Entity buildEntity(final Entity e, EntityWorld world, Object... args) {
+		e.init("", "", "explosion");
+		Vector2 position = (Vector2) args[0];
 		
-
-		String color = (String) args[0];
-		Entity portal = (Entity) args[1];
-		Body pbody = portal.getComponent(Body.class);
-		
-		
+		String peFile;
+		if(args.length > 1)
+			peFile = "portaldeath.particle";
+		else
+			peFile = "explosion.particle";
 		ParticleEffect pe = new ParticleEffect(
-				Gdx.files.internal(color + ".particle"),
+				Gdx.files.internal(peFile),
 				Gdx.files.internal("img"));
 		pe.start();
 		pe.setLayer(3);
 		e.addComponent(pe);
 		
-		final Vector2 position = pbody.getPosition().cpy();
-		e.addComponent(new Particle(e,position, 0));
-		portal.onDeleted.addCallback("particle", new EventCallback(){
-			@Override
-			public void invoke(Entity port, Object... args) {
-				e.delete();
-			}
-		});
+		e.addComponent(new Particle(e, position.cpy(), 0));
+		
+		world.getProcessManager().attach(new DelayProcess(3,
+				new DeletionProcess(e)));
+		
 		
 		
 		return e;

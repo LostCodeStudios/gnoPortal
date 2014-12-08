@@ -49,7 +49,7 @@ public class PortalTemplate implements EntityTemplate {
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(Convert.pixelsToMeters(sprite.getWidth() / 2), Convert.pixelsToMeters(sprite.getHeight() / 2));
 		
-		Body body = new Body(world, e, BodyType.StaticBody, (Vector2) args[1]);
+		final Body body = new Body(world, e, BodyType.StaticBody, (Vector2) args[1]);
 		e.addComponent(body);
 		
 		TriggerZone sensor = new TriggerZone(e, shape) {
@@ -71,6 +71,9 @@ public class PortalTemplate implements EntityTemplate {
 					Velocity bv = elol.getComponent(Velocity.class);
 					bv.setLinearVelocity(bv.getLinearVelocity().cpy().nor().scl((float) (BallTemplate.VELOCITY*Math.pow(1.2, portalC))));
 					
+					
+					world.createEntity("explosion", ob.getPosition().cpy(), true);
+					world.createEntity("explosion", body.getPosition().cpy(), true);
 					other.delete();
 					e.delete();
 					
