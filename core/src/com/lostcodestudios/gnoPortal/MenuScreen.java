@@ -27,14 +27,14 @@ public class MenuScreen extends InputScreen {
 		consoleData.add("#!/bin/ld");
 		consoleData.add("welcome dude");
 		consoleData.add("someguy@a-computer$ help");
-		consoleData.add("LCS bash, version 1.3.7(1)-release. Type `help' to see this list");
+		consoleData.add("LCS bash, version 1.3.7(1)-release. Type `help' to see more");
 		consoleData.add(" ");
 		consoleData.add("A star (*) next to a name means that the command is disabled.");
 		consoleData.add("  play          -a fun game            ");
 		consoleData.add("  quit          -a sad choice ");
+		consoleData.add("  help          -a tutorial");
 		consoleData.add(" *rm -rf /      -deletes everything");
 		consoleData.add(" *while[true]   -please don't ");
-		consoleData.add(" *help          -just choose a command already");
 		consoleData.add("someguy@a-computer$ ");
 		
 	}
@@ -93,10 +93,20 @@ public class MenuScreen extends InputScreen {
 		else{
 			consoleData.set(currentInput, consoleData.get(currentInput)+ command );
 			if(command.equals("rm") || command.equals("rm -rf") 
-					||command.equals("rm -rf /") || command.equals("while[true]") || command.equals("help"))
+					||command.equals("rm -rf /") || command.equals("while[true]"))
 				consoleData.add("I'm sorry Dave. I'm afraid I can't do that.");
 			else if(command.equals("dance"))
 				consoleData.add("I AM NOT UR DANCE SLAVE BRO. call 8018010781 for a prize.");
+			else if (command.equals("help")) {
+				consoleData.add("    hold W/S to move up and down");
+				consoleData.add("    first click: fire the Pong ball");
+				consoleData.add("    aim your portal gun with the mouse");
+				consoleData.add("    left click: shoot a blue portal.");
+				consoleData.add("    right click: shoot an orange portal.");
+				consoleData.add("    direct the ball to destroy your opponent's wall and score");
+				consoleData.add("    press ESCAPE to exit the game");
+				consoleData.add("    THERE ARE THREE LEVELS! Type \"play 2\" or \"play 3\" to see them");
+			}
 			else
 				consoleData.add("come on dude...");
 			consoleData.add("someguy@a-computer$ ");

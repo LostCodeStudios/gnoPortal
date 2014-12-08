@@ -17,6 +17,8 @@ public class AISystem extends EntitySystem {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public int level = 1;
 
 	@Override
 	protected void process(Entity e) {
@@ -82,7 +84,7 @@ public class AISystem extends EntitySystem {
 		//bp is me
 		// bb is ball
 		
-		if (random.percent(1f) && bb.getLinearVelocity().len() != 0) {
+		if (random.percent(2 * level) && bb.getLinearVelocity().len() != 0) {
 			// if there is no blue portal/bullet, try and make one
 			
 			Entity e = world.tryGetEntity("blue", "enemy", "portal");
@@ -91,7 +93,7 @@ public class AISystem extends EntitySystem {
 			if (e == null && e2 == null) {
 				// shoot on this side
 				
-				float x = random.nextFloat(36, 722/2 - 24);
+				float x = random.nextFloat(50, 722/2 - 100);
 				x = Convert.pixelsToMeters(x);
 				
 				float y = random.nextFloat(-462/2, 462/2);
@@ -109,7 +111,7 @@ public class AISystem extends EntitySystem {
 				if (e == null && e2 == null) {
 					// shoot on the other side
 					
-					float x = random.nextFloat(-722/2 + 24, -36);
+					float x = random.nextFloat(-722/2 + 100, -50);
 					x = Convert.pixelsToMeters(x);
 					
 					float y = random.nextFloat(-462/2, 462/2);

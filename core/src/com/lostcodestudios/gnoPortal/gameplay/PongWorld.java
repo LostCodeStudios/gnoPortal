@@ -74,6 +74,7 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("porticle", new PorticleTemplate());
 	}
 	
+	private AISystem aiSystem;
 	private InputSystem inputSystem;
 	@Override
 	protected void buildSystems() {
@@ -81,7 +82,8 @@ public class PongWorld extends EntityWorld {
 		
 		systems.addSystem(inputSystem = new InputSystem(input, Ball));
 		systems.addSystem(new TargetSystem());
-		systems.addSystem(new AISystem());
+		aiSystem = new AISystem();
+		systems.addSystem(aiSystem);
 		systems.addSystem(new PortalSystem());
 	}
 
@@ -103,6 +105,9 @@ public class PongWorld extends EntityWorld {
 	}
 	public void buildLevel(int level) {
 		System.out.println("level" + level);
+		
+		aiSystem.level = level;
+		
 		switch (level) {
 			//make things interesting!!
 		

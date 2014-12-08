@@ -115,7 +115,7 @@ public class GameplayScreen extends InputScreen {
 					index = 0;
 				}
 			
-		}
+			}
 		}
 		
 		
@@ -182,12 +182,12 @@ public class GameplayScreen extends InputScreen {
 
 	@Override
 	public void pause() {
-		
+		world.pause();
 	}
 
 	@Override
 	public void resume() {
-		
+		world.resume();
 	}
 
 	@Override
@@ -199,6 +199,9 @@ public class GameplayScreen extends InputScreen {
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.ESCAPE || keycode == Keys.BACK) {
 			game.getScreenManager().addScreen(new MenuScreen(game));
+			
+			world.dispose();
+			
 			exit();
 		}
 		
