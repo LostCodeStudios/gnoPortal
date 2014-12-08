@@ -82,7 +82,7 @@ public class AISystem extends EntitySystem {
 		//bp is me
 		// bb is ball
 		
-		if (true) {
+		if (random.percent(1f) && bb.getLinearVelocity().len() != 0) {
 			// if there is no blue portal/bullet, try and make one
 			
 			Entity e = world.tryGetEntity("blue", "enemy", "portal");

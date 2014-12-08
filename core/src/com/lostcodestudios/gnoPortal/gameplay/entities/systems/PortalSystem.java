@@ -31,7 +31,7 @@ public class PortalSystem extends TypeSystem {
 		else
 			antiColor = "orange";
 		
-		if( !world.isGameOver() && ( world.tryGetEntity(antiColor, "player", "")) != null){
+		if( !world.isGameOver() && ( world.tryGetEntity(antiColor, e.getGroup(), "")) != null){
 			Entity ball = ((PongWorld)world).Ball;
 			//apply gravitational force to ball
 			
