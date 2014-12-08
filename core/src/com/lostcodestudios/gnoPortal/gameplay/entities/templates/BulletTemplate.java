@@ -16,6 +16,9 @@ public class BulletTemplate implements EntityTemplate {
 
 	}
 
+	
+	static int count = 0;
+
 	@Override
 	public Entity buildEntity(Entity e, EntityWorld world, Object... args) {
 //0: color
@@ -31,6 +34,9 @@ public class BulletTemplate implements EntityTemplate {
 		
 		Vector2 position = (Vector2) args[1];
 		Vector2 target = (Vector2) args[2];
+		
+		e.init(color + "bullet" + count, group, color + "bullet");
+		++count;
 		
 		Particle p = new Particle(e, position, 0f);
 		

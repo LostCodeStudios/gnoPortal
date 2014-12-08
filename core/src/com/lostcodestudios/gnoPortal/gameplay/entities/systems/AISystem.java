@@ -6,6 +6,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.systems.EntitySystem;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcode.javalib.utils.Random;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 import com.lostcodestudios.gnoPortal.gameplay.entities.components.AI;
 
@@ -23,10 +24,14 @@ public class AISystem extends EntitySystem {
 		Body target = ai.target.getComponent(Body.class);
 		Body eb = e.getComponent(Body.class);
 		
-		if(dist(eb,target) < 200 && target.getLinearVelocity().x > 0)
+		if(dist(eb,target) < 100 && target.getLinearVelocity().x > 0)
 			defense(eb, target);
 		else
+		{	
 			move(eb,0);
+			attack(eb, target);
+		}
+		
 	}
 
 	public float dist(Body a, Body b){
@@ -70,6 +75,53 @@ public class AISystem extends EntitySystem {
 	@Override
 	public boolean canProcess(Entity e) {
 		return e.hasComponent(AI.class);
+	}
+	
+	Random random = new Random();
+	public void attack(Body bp, Body bb){
+		//bp is me
+		// bb is ball
+		
+		if (true) {
+			// if there is no blue portal/bullet, try and make one
+			
+			Entity e = world.tryGetEntity("blue", "enemy", "portal");
+			Entity e2 = world.tryGetEntity("", "enemy", "bluebullet");
+			
+			if (e == null && e2 == null) {
+				// shoot on this side
+				
+				float x = random.nextFloat(36, 722/2 - 24);
+				x = Convert.pixelsToMeters(x);
+				
+				float y = random.nextFloat(-462/2, 462/2);
+				y = Convert.pixelsToMeters(y);
+				
+				Vector2 target = new Vector2(x, y);
+				
+				world.createEntity("bullet", "blue", bp.getPosition(), target, "enemy");
+			} else {
+				// check if there is an orange portal/bullet
+				
+				e = world.tryGetEntity("orange", "enemy", "portal");
+				e2 = world.tryGetEntity("", "enemy", "orangebullet");
+				
+				if (e == null && e2 == null) {
+					// shoot on the other side
+					
+					float x = random.nextFloat(-722/2 + 24, -36);
+					x = Convert.pixelsToMeters(x);
+					
+					float y = random.nextFloat(-462/2, 462/2);
+					y = Convert.pixelsToMeters(y);
+					
+					Vector2 target = new Vector2(x, y);
+					
+					world.createEntity("bullet", "orange", bp.getPosition(), target, "enemy");
+				}
+			}
+			
+		}
 	}
 	
 	public void defense(Body pb, Body bb){
