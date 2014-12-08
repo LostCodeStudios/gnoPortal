@@ -36,7 +36,7 @@ public class BallTemplate implements EntityTemplate {
 		
 		Sprite sprite = new Sprite(world.getSpriteSheet(), "ball");
 		
-		sprite.setLayer(2);
+		sprite.setLayer(4);
 		
 		e.addComponent(sprite);
 		

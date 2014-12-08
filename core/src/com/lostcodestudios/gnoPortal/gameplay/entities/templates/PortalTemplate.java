@@ -80,6 +80,8 @@ public class PortalTemplate implements EntityTemplate {
 	
 		e.addComponent(sensor);
 		
+		world.createEntity("porticle", color, e);
+		
 		return e;
 	}
 
