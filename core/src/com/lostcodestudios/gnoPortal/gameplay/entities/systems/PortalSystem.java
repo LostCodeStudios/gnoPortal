@@ -5,13 +5,14 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Transform;
 import com.lostcode.javalib.entities.systems.GroupSystem;
+import com.lostcode.javalib.entities.systems.TypeSystem;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
-public class PortalSystem extends GroupSystem {
+public class PortalSystem extends TypeSystem {
 
 	public static float ATTRACTION = 10000;
 	public PortalSystem() {
-		super("player");
+		super("portal");
 		// TODO Auto-generated constructor stub
 	}
 

@@ -21,7 +21,9 @@ public class BulletTemplate implements EntityTemplate {
 //0: color
 		// 1: pos
 		// 2: target pos
+		// 3: group
 		final String color = (String) args[0];
+		final String group = (String) args[3];
 		
 		Sprite sprite = new Sprite(world.getSpriteSheet(), color + "bullet");
 		
@@ -52,7 +54,7 @@ public class BulletTemplate implements EntityTemplate {
 						System.out.println("oops");
 				} while (e1 != null);	
 				
-				world.createEntity("portal", "player", target, color);
+				world.createEntity("portal", group, target, color);
 			}
 			
 		};

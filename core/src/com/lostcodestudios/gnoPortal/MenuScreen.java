@@ -77,7 +77,7 @@ public class MenuScreen extends InputScreen {
 			if (command.length() > 5) { // AN ARGUMENT!
 				level = Integer.parseInt(command.substring(5).trim());
 				
-				if (level > 0 && level < 3) // TODO SET THIS MAX!!!!!
+				if (level > 0 && level <= 3) // TODO SET THIS MAX!!!!!
 				{
 					
 				}
