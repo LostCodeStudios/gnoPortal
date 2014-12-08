@@ -139,7 +139,7 @@ Entity player = world.tryGetEntity("paddleleft", "paddles", "player");
 				Transform t = player.getComponent(Transform.class);
 				Vector2 playerPos = t.getPosition();
 				
-				world.createEntity("bullet", "orange", playerPos, pos);
+				world.createEntity("bullet", "orange", playerPos, pos, "player");
 			}
 			
 			return false;	
