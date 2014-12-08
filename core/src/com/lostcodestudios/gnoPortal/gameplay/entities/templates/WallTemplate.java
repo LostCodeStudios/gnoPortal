@@ -70,7 +70,7 @@ public class WallTemplate implements EntityTemplate{
 						float rot = 0f;
 						
 						if (e.getTag().equals("leftWall")) {
-							rot = 180f;
+							rot = (float) Math.PI;
 							dir = 1;
 						}
 						
