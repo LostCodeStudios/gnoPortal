@@ -52,7 +52,7 @@ public class BulletTemplate implements EntityTemplate {
 				Entity e1 = null;
 				
 				do {
-					 e1 = world.tryGetEntity(color, "player", "portal");
+					 e1 = world.tryGetEntity(color, group, "portal");
 				
 					if (e1 != null)
 						e1.delete();

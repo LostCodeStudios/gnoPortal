@@ -25,7 +25,7 @@ public class GnoPortal extends Game {
 		Convert.init(8f);
 		LogManager.init(Gdx.app, LogType.ERROR);
 		
-		title = "Ninja Space Pirate";
+		title = "gnoPortal";
 		
 		landscapeMode = true;
 		super.width = 462;

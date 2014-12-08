@@ -2,7 +2,9 @@ package com.lostcodestudios.gnoPortal.gameplay.entities.templates;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.QueryCallback;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.entities.components.generic.TriggerZone;
@@ -79,6 +81,24 @@ public class PortalTemplate implements EntityTemplate {
 		};
 	
 		e.addComponent(sensor);
+		
+		Vector2 position = (Vector2) args[1];
+		
+		float dim = 8;
+		world.getBox2DWorld().QueryAABB(new QueryCallback() {
+
+			@Override
+			public boolean reportFixture(Fixture fixture) {
+				Entity blocker = (Entity) fixture.getBody().getUserData();
+				
+				if (blocker.getType().equals("wall") || blocker.getType().equals("ball")) {
+				
+					e.delete(); // haha idk if this will workj
+				}
+				return false;
+			}
+			
+		}, position.x - dim, position.y - dim, position.x + dim, position.y + dim);
 		
 		world.createEntity("porticle", color, e);
 		
