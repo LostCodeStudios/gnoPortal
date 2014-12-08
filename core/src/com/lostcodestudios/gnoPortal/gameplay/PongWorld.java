@@ -22,6 +22,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BallTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.BulletTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.CrosshairTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.DesktopTemplate;
+import com.lostcodestudios.gnoPortal.gameplay.entities.templates.ExplosionTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PaddleTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PortalTemplate;
 import com.lostcodestudios.gnoPortal.gameplay.entities.templates.PorticleTemplate;
@@ -34,7 +35,7 @@ import com.lostcodestudios.gnoPortal.gameplay.entities.templates.WallTemplate;
  */
 public class PongWorld extends EntityWorld {
 
-	public static final float PADDLE_SPEED = 25f;
+	public static final float PADDLE_SPEED = 35f;
 	public Entity Ball;
 
 	int level;
@@ -72,6 +73,7 @@ public class PongWorld extends EntityWorld {
 		this.addTemplate("bullet", new BulletTemplate());
 		this.addTemplate("trail", new TrailTemplate());
 		this.addTemplate("porticle", new PorticleTemplate());
+		this.addTemplate("explosion", new ExplosionTemplate());
 	}
 	
 	private AISystem aiSystem;

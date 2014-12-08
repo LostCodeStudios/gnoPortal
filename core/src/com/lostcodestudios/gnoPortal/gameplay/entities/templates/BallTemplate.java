@@ -12,6 +12,7 @@ import com.lostcode.javalib.entities.components.ComponentManager;
 import com.lostcode.javalib.entities.components.generic.Health;
 import com.lostcode.javalib.entities.components.physical.Body;
 import com.lostcode.javalib.entities.components.physical.Collidable;
+import com.lostcode.javalib.entities.components.physical.Transform;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
@@ -26,7 +27,7 @@ public class BallTemplate implements EntityTemplate {
 	}
 
 	@Override
-	public Entity buildEntity(Entity e, EntityWorld world, Object... args) {
+	public Entity buildEntity(Entity e, final EntityWorld world, Object... args) {
 		String side = (String)args[0];
 		
 		
@@ -61,7 +62,7 @@ public class BallTemplate implements EntityTemplate {
 		bd.type = BodyType.DynamicBody;
 		bd.allowSleep = false;
 		bd.fixedRotation = false;
-		Body body = new Body(world, e, bd, fd);
+		final Body body = new Body(world, e, bd, fd);
 		e.addComponent(body);
 		
 		e.addComponent(new Collidable(){
@@ -69,7 +70,12 @@ public class BallTemplate implements EntityTemplate {
 			public void onBeginContact(Entity container, Entity victim) {
 				if(victim.hasComponent(Health.class)){
 					Health h = victim.getComponent(Health.class);
+					Transform vic = victim.getComponent(Transform.class);
 					h.drain(10);
+					Vector2 splodePos = new Vector2(
+							(vic.getPosition().x+ body.getPosition().x)/2f,
+							body.getPosition().y);
+					world.createEntity("explosion", splodePos);
 					
 				}
 				System.out.println("Collision");

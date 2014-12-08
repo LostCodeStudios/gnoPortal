@@ -47,7 +47,7 @@ public class WallTemplate implements EntityTemplate{
 		
 		if(e.getTag().equals("leftWall") || e.getTag().equals("rightWall"))
 		{
-			Health h = new Health(e,world, 100){
+			Health h = new Health(e,world, 500){
 				@Override
 				protected void onEmpty() {
 					//End the game;

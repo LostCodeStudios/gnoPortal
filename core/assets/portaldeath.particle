@@ -1,0 +1,194 @@
+Untitled
+- Delay -
+active: false
+- Duration - 
+lowMin: 500.0
+lowMax: 500.0
+- Count - 
+min: 0
+max: 100
+- Emission - 
+lowMin: 16.0
+lowMax: 16.0
+highMin: 16.0
+highMax: 16.0
+relative: false
+scalingCount: 8
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 1.0
+scaling3: 1.0
+scaling4: 1.0
+scaling5: 1.0
+scaling6: 1.0
+scaling7: 1.0
+timelineCount: 8
+timeline0: 0.0
+timeline1: 0.20547946
+timeline2: 0.36301368
+timeline3: 0.4520548
+timeline4: 0.58219177
+timeline5: 0.69863015
+timeline6: 0.8287671
+timeline7: 1.0
+- Life - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1000.0
+highMax: 2000.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.999
+timeline2: 1.0
+- Life Offset - 
+active: false
+- X Offset - 
+active: false
+- Y Offset - 
+active: false
+- Spawn Shape - 
+shape: point
+- Spawn Width - 
+lowMin: 4.0
+lowMax: 4.0
+highMin: 4.0
+highMax: 4.0
+relative: false
+scalingCount: 1
+scaling0: 0.0
+timelineCount: 1
+timeline0: 0.0
+- Spawn Height - 
+lowMin: 4.0
+lowMax: 4.0
+highMin: 4.0
+highMax: 4.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Scale - 
+lowMin: 5.0
+lowMax: 5.0
+highMin: 5.0
+highMax: 5.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Velocity - 
+active: true
+lowMin: 1.0
+lowMax: 1.0
+highMin: 30.0
+highMax: 30.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 1.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.34931508
+timeline2: 0.49315068
+- Angle - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 360.0
+relative: false
+scalingCount: 3
+scaling0: 1.0
+scaling1: 1.0
+scaling2: 0.0
+timelineCount: 3
+timeline0: 0.0
+timeline1: 0.999
+timeline2: 1.0
+- Rotation - 
+active: false
+- Wind - 
+active: true
+lowMin: 0.0
+lowMax: 0.0
+highMin: 0.0
+highMax: 0.0
+relative: false
+scalingCount: 1
+scaling0: 1.0
+timelineCount: 1
+timeline0: 0.0
+- Gravity - 
+active: false
+- Tint - 
+colorsCount: 27
+colors0: 1.0
+colors1: 0.31764707
+colors2: 0.047058824
+colors3: 0.0
+colors4: 0.31764707
+colors5: 1.0
+colors6: 1.0
+colors7: 0.0
+colors8: 0.0
+colors9: 0.41960785
+colors10: 0.047058824
+colors11: 1.0
+colors12: 1.0
+colors13: 0.45490196
+colors14: 0.047058824
+colors15: 0.047058824
+colors16: 0.38431373
+colors17: 1.0
+colors18: 1.0
+colors19: 0.047058824
+colors20: 0.047058824
+colors21: 0.45490196
+colors22: 0.047058824
+colors23: 1.0
+colors24: 1.0
+colors25: 0.44313726
+colors26: 0.047058824
+timelineCount: 9
+timeline0: 0.0
+timeline1: 0.15662651
+timeline2: 0.2719449
+timeline3: 0.37349397
+timeline4: 0.47504303
+timeline5: 0.5972461
+timeline6: 0.7125645
+timeline7: 0.86919105
+timeline8: 1.0
+- Transparency - 
+lowMin: 0.0
+lowMax: 0.0
+highMin: 1.0
+highMax: 1.0
+relative: false
+scalingCount: 4
+scaling0: 0.0
+scaling1: 1.0
+scaling2: 0.98245615
+scaling3: 0.0
+timelineCount: 4
+timeline0: 0.0
+timeline1: 0.001
+timeline2: 0.5
+timeline3: 1.0
+- Options - 
+attached: false
+continuous: false
+aligned: false
+additive: true
+behind: false
+premultipliedAlpha: false
+- Image Path -
+lol.png
