@@ -14,6 +14,7 @@ import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
 import com.lostcode.javalib.utils.Convert;
 import com.lostcode.javalib.utils.SpriteSheet;
+import com.lostcodestudios.gnoPortal.GameplayScreen;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.AISystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.InputSystem;
 import com.lostcodestudios.gnoPortal.gameplay.entities.systems.PortalSystem;
@@ -78,6 +79,7 @@ public class PongWorld extends EntityWorld {
 	
 	private AISystem aiSystem;
 	private InputSystem inputSystem;
+	private boolean done;
 	@Override
 	protected void buildSystems() {
 		super.buildSystems();
@@ -151,5 +153,13 @@ public class PongWorld extends EntityWorld {
 
 	public void enableDebug(){
 		debugView.enabled = true;
+	}
+
+	public void mainMenu() {
+		this.done = true;
+	}
+	
+	public boolean done(){
+		return done;
 	}
 }

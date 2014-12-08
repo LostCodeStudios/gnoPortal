@@ -127,12 +127,20 @@ public class GameplayScreen extends InputScreen {
 		
 		if (world.isGameOver()) {
 			//StealthGameOverInfo info = (StealthGameOverInfo) world.getGameOverInfo();
+			
+			if(world.done()){
+				game.getScreenManager().addScreen(new MenuScreen(game));
+				dispose();
+				exit();
+			}
+				
+			
 			this.win = true;
 			zoom = 2.33f;
 			System.out.println("hi");
 			((OrthographicCamera)world.getCamera()).zoom = zoom;
 			cam.zoom = 1.34f;
-			world.setTimeCoefficient(0.25f);
+			world.setTimeCoefficient(0.1f);
 			
 			FBO_SIZE = (int) (1024*1f);
 			offset = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()).scl(1f/2.33f).add(180,140);
@@ -193,6 +201,12 @@ public class GameplayScreen extends InputScreen {
 	@Override
 	public void dispose() {
 		world.dispose();
+		batchBatch.dispose();
+		sb.dispose();
+		blurTargetA.dispose();
+		blurTargetB.dispose();
+		blurShader.dispose();
+		consoleFont.dispose();
 	}
 
 	@Override
@@ -200,7 +214,7 @@ public class GameplayScreen extends InputScreen {
 		if (keycode == Keys.ESCAPE || keycode == Keys.BACK) {
 			game.getScreenManager().addScreen(new MenuScreen(game));
 			
-			world.dispose();
+			dispose();
 			
 			exit();
 		}
@@ -302,6 +316,7 @@ public class GameplayScreen extends InputScreen {
 		//finally, end the batch since we have reached the end of the frame
 		sb.end();
 	}
+
 	
 	final String VERT =  
 			"attribute vec4 "+ShaderProgram.POSITION_ATTRIBUTE+";\n" +

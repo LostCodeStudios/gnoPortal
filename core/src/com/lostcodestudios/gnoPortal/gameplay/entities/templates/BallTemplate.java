@@ -1,6 +1,5 @@
 package com.lostcodestudios.gnoPortal.gameplay.entities.templates;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
@@ -17,6 +16,7 @@ import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
 public class BallTemplate implements EntityTemplate {
 	public static final  float VELOCITY = 20;
@@ -45,7 +45,7 @@ public class BallTemplate implements EntityTemplate {
 
 			@Override
 			public void invoke(Entity e, Object... args) {
-				Gdx.app.exit();
+				((PongWorld)world).mainMenu();
 			}
 			
 		});
