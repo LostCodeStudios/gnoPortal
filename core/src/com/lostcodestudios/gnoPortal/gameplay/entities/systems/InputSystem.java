@@ -127,7 +127,7 @@ public class InputSystem extends com.lostcode.javalib.entities.systems.InputSyst
 				Transform t = player.getComponent(Transform.class);
 				Vector2 playerPos = t.getPosition();
 				
-				world.createEntity("bullet", "blue", playerPos, pos);
+				world.createEntity("bullet", "blue", playerPos, pos, "player");
 			}
 			if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)){
 				// right click?
