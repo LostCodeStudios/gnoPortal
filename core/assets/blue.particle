@@ -185,10 +185,10 @@ timeline2: 0.999
 timeline3: 1.0
 - Options - 
 attached: false
-continuous: false
+continuous: true
 aligned: false
 additive: true
 behind: false
 premultipliedAlpha: false
 - Image Path -
-C:\Users\Nathaniel\Documents\gnoPortal\core\assets\img\lol.png
+lol.png
