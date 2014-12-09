@@ -14,6 +14,7 @@ import com.lostcode.javalib.entities.components.physical.Velocity;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcode.javalib.utils.SoundManager;
 
 public class PortalTemplate implements EntityTemplate {
 
@@ -78,7 +79,11 @@ public class PortalTemplate implements EntityTemplate {
 					e.delete();
 					
 					//POSSIBLY PLAY A TELEPORT PARTICLE EFFECT
+					
+					SoundManager.playSound("portal");
 				}
+				
+
 			}
 			
 		};

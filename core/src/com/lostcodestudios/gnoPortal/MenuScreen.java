@@ -28,6 +28,8 @@ public class MenuScreen extends InputScreen {
 		consoleData.add("welcome dude");
 		consoleData.add("someguy@a-computer$ help");
 		consoleData.add("LCS bash, version 1.3.7(1)-release. Type `help' to see more");
+		
+		consoleData.add("music: \"She Melts\" by Com Truise");
 		consoleData.add(" ");
 		consoleData.add("A star (*) next to a name means that the command is disabled.");
 		consoleData.add("  play          -a fun game            ");

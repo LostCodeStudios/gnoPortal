@@ -16,6 +16,7 @@ import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
 import com.lostcode.javalib.utils.Convert;
+import com.lostcode.javalib.utils.SoundManager;
 import com.lostcodestudios.gnoPortal.gameplay.PongWorld;
 
 public class BallTemplate implements EntityTemplate {
@@ -63,11 +64,14 @@ public class BallTemplate implements EntityTemplate {
 		bd.allowSleep = false;
 		bd.fixedRotation = false;
 		final Body body = new Body(world, e, bd, fd);
+	
 		e.addComponent(body);
 		
 		e.addComponent(new Collidable(){
 			@Override
 			public void onBeginContact(Entity container, Entity victim) {
+				SoundManager.playSound("bounce");
+				
 				if(victim.hasComponent(Health.class)){
 					Health h = victim.getComponent(Health.class);
 					Transform vic = victim.getComponent(Transform.class);

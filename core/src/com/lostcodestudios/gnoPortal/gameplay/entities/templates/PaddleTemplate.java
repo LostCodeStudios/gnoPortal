@@ -5,7 +5,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.lostcode.javalib.entities.Entity;
 import com.lostcode.javalib.entities.EntityWorld;
+import com.lostcode.javalib.entities.components.ComponentManager;
 import com.lostcode.javalib.entities.components.physical.Body;
+import com.lostcode.javalib.entities.components.physical.Collidable;
 import com.lostcode.javalib.entities.components.render.Sprite;
 import com.lostcode.javalib.entities.events.EventCallback;
 import com.lostcode.javalib.entities.templates.EntityTemplate;
@@ -37,6 +39,23 @@ public class PaddleTemplate implements EntityTemplate {
 		
 		sprite.setLayer(3);
 		e.addComponent(sprite);
+		
+		// collidable so it will let the ball play sounds!
+		e.addComponent(new Collidable() {
+
+			@Override
+			public void onAdd(ComponentManager container) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onRemove(ComponentManager container) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		PolygonShape shape = new PolygonShape();
 		 
