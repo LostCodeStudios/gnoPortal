@@ -70,7 +70,7 @@ public class BallTemplate implements EntityTemplate {
 		e.addComponent(new Collidable(){
 			@Override
 			public void onBeginContact(Entity container, Entity victim) {
-				SoundManager.playSound("bounce");
+				SoundManager.playSound("bounce", 0.6f);
 				
 				if(victim.hasComponent(Health.class)){
 					Health h = victim.getComponent(Health.class);

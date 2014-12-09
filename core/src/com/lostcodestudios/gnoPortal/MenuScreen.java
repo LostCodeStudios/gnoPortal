@@ -12,7 +12,7 @@ public class MenuScreen extends InputScreen {
 	BitmapFont consoleFont;
 	SpriteBatch sb;
 	Array<String> consoleData;
-	int currentInput = 11;
+	int currentInput = 12;
 	String input;
 	
 	public MenuScreen(Game game) {
