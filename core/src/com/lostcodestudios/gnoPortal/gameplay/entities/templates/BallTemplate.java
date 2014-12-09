@@ -56,7 +56,7 @@ public class BallTemplate implements EntityTemplate {
 		BodyDef bd = new BodyDef();
 		FixtureDef fd = new FixtureDef();
 		fd.shape = shape;
-		fd.restitution = 1.01f;
+		fd.restitution = 1.007f;
 		fd.friction=0;
 		bd.position.set(Convert.pixelsToMeters(new Vector2(-722f/2f + 64f, 0)));
 		bd.type = BodyType.DynamicBody;

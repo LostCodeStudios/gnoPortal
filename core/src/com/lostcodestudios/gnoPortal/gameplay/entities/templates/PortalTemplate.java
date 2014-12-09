@@ -69,7 +69,7 @@ public class PortalTemplate implements EntityTemplate {
 					Transform ob = other.getComponent(Transform.class);
 					bb.setPosition(ob.getPosition());
 					Velocity bv = elol.getComponent(Velocity.class);
-					bv.setLinearVelocity(bv.getLinearVelocity().cpy().nor().scl((float) (BallTemplate.VELOCITY*Math.pow(1.2, portalC))));
+					bv.setLinearVelocity(bv.getLinearVelocity().cpy().nor().scl((float) (BallTemplate.VELOCITY*Math.pow(1.1, portalC))));
 					
 					
 					world.createEntity("explosion", ob.getPosition().cpy(), true);

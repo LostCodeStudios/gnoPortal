@@ -19,6 +19,7 @@ public class AISystem extends EntitySystem {
 	}
 	
 	public int level = 1;
+	boolean moving = false;
 
 	@Override
 	protected void process(Entity e) {
@@ -26,13 +27,15 @@ public class AISystem extends EntitySystem {
 		Body target = ai.target.getComponent(Body.class);
 		Body eb = e.getComponent(Body.class);
 		
-		if(dist(eb,target) < 100 && target.getLinearVelocity().x > 0)
+		if(disp(eb,target).x < 46.75 && target.getLinearVelocity().x > 0)
 			defense(eb, target);
 		else
 		{	
 			move(eb,0);
+			if(target.getPosition().x >= 0 || random.percent(2*level+2))
 			attack(eb, target);
 		}
+		
 		
 	}
 
@@ -62,15 +65,18 @@ public class AISystem extends EntitySystem {
 		
 		Vector2 dir = disp(new Vector2(pos.x, y),pos);
 		
-
+		if(moving == false && random.percent(75 + 25f/3f*(float)level))
+			moving = true;
 		
 	
 		if(dir.len() > 4){
 			Vector2 vel = new Vector2(0, Math.signum(dir.y)*PongWorld.PADDLE_SPEED);
 			b.setLinearVelocity(vel);
 		}
-		else
+		else{
+			moving = false;
 			b.setLinearVelocity(Vector2.Zero.cpy());
+		}
 	}
 	
 	
@@ -79,12 +85,14 @@ public class AISystem extends EntitySystem {
 		return e.hasComponent(AI.class);
 	}
 	
+	boolean blue = false;
+	boolean orange = false;
 	Random random = new Random();
 	public void attack(Body bp, Body bb){
 		//bp is me
 		// bb is ball
 		
-		if (random.percent(2 * level) && bb.getLinearVelocity().len() != 0) {
+		if (random.percent(2 * level+2) && bb.getLinearVelocity().len() != 0) {
 			// if there is no blue portal/bullet, try and make one
 			
 			Entity e = world.tryGetEntity("blue", "enemy", "portal");
@@ -102,6 +110,8 @@ public class AISystem extends EntitySystem {
 				Vector2 target = new Vector2(x, y);
 				
 				world.createEntity("bullet", "blue", bp.getPosition(), target, "enemy");
+				
+				
 			} else {
 				// check if there is an orange portal/bullet
 				
